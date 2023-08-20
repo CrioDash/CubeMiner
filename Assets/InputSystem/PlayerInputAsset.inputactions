@@ -1,0 +1,74 @@
+{
+    "name": "PlayerInputAsset",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "19f1c46b-1f39-4c23-9741-0b22f5e0de59",
+            "actions": [
+                {
+                    "name": "MenuScene",
+                    "type": "Button",
+                    "id": "a263cbb9-e80e-48cd-b976-ad3e9c9650a5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PlayScene",
+                    "type": "Button",
+                    "id": "a4fb1a44-ddea-40aa-9bcb-5f4a49df7159",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MiscScene",
+                    "type": "Button",
+                    "id": "887011e9-e908-40aa-82ea-aef8623c370d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "618596ad-a8dd-46e6-a405-c653654d3e17",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuScene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5d67d813-eee0-4d44-a282-94559ead8986",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayScene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "288e2053-25e1-45dc-867a-dcc3bdea8f4d",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MiscScene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
