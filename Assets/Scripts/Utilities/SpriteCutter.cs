@@ -7,6 +7,7 @@ using Unity.Properties;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Variables = Data.Variables;
 
 public class SpriteCutter : MonoBehaviour
 {
@@ -24,6 +25,11 @@ public class SpriteCutter : MonoBehaviour
 
         obj.GetComponentInChildren<Rigidbody2D>().WakeUp();
 
+        SpriteRenderer rend = obj.GetComponent<SpriteRenderer>();
+        
+        system.gameObject.GetComponent<AudioSource>().Play();
+        
+        system.gameObject.GetComponent<ParticleSystemRenderer>().material = rend.material;
         system.Play();
         system.transform.SetParent(null);
         Vector3 pos = obj.transform.position;
@@ -31,13 +37,14 @@ public class SpriteCutter : MonoBehaviour
         pos.y -= 1;
         system.transform.position = pos;
         system.transform.localScale = Vector3.one;
-
-
-        SpriteRenderer rend = obj.GetComponent<SpriteRenderer>();
+        
+        
 
         Mesh firstMesh = new Mesh();
         Mesh secondMesh = new Mesh();
 
+       
+        
         Material mat = rend.material;
         mat.mainTexture = rend.sprite.texture;
 
@@ -80,7 +87,6 @@ public class SpriteCutter : MonoBehaviour
                      (Math.Abs(tempPoints[j].y - vertices[i].y) == 0 &&
                       Math.Abs(tempPoints[j].y - vertices[i + 1].y) == 0))
                 {
-                    Debug.Log(tempPoints[j]);
                     firstVertices.Add(tempPoints[j]);
                     secondVertices.Add(tempPoints[j]);
                     tempPoints.Remove(tempPoints[j]);
@@ -94,13 +100,12 @@ public class SpriteCutter : MonoBehaviour
         SetupMesh(secondMesh, secondVertices.ToArray(), max);
 
         Vector2 velocity = obj.GetComponent<Rigidbody2D>().velocity;
-        
-        if(firstVertices.Count <=2 || secondVertices.Count <= 2)
-            Debug.Log("Cringe");
 
         CopyGameObject(firstMesh, mat, velocity, obj, cutPoints.ToArray());
         CopyGameObject(secondMesh, mat, velocity, obj, cutPoints.ToArray());
-
+        
+        Variables.Score += 100;
+        
         Destroy(obj.gameObject);
 
     }
@@ -185,10 +190,11 @@ public class SpriteCutter : MonoBehaviour
         Rigidbody2D body = gameObject.AddComponent(typeof(Rigidbody2D)) as Rigidbody2D;
         body.velocity = velocity;
         
-        body.AddForce(new Vector2(Random.Range(-750, 750), Random.Range(-500, -250)));
+        body.AddForce(new Vector2(Random.Range(-750, 750), Random.Range(-1500, -900)));
         body.AddTorque(5, ForceMode2D.Impulse);
 
-        Destroy(gameObject.gameObject, 2);
+        StartCoroutine(CuttersFadeRoutine(renderer));
+
     }
 
     Vector3 ClosestPoint(Vector3 p, Vector2 min, Vector2 max)
@@ -237,5 +243,19 @@ public class SpriteCutter : MonoBehaviour
 
         return closest;
     }
-    
+
+    private IEnumerator CuttersFadeRoutine(MeshRenderer rend)
+    {
+        float t = 0;
+        Color clear = Color.white;
+        clear.a = 0;
+        while (t < 1)
+        {
+            rend.material.color = Color.Lerp(Color.white, clear, t);
+            t += Time.fixedDeltaTime*2;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        Destroy(rend.gameObject);
+    }
+
 }

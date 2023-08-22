@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Data;
 using Input;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -32,6 +33,7 @@ public class SceneSwitcher : MonoBehaviour
 
     public void LoadScene(string name)
     {
+        Variables.Score = 0;
         StartCoroutine(LoadSceneRoutine(name));
     }
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using PlayerScripts;
+using UnityEngine;
 
 namespace Utilities
 {
@@ -14,6 +15,7 @@ namespace Utilities
         {
             IsPaused = !IsPaused;
             Time.timeScale = IsPaused ? 0 : 1;
+            SlashControlScript.Instance.DisableSlasher();
         }
     }
 }

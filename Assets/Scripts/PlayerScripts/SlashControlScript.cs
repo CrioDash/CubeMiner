@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using Utilities;
 
 namespace PlayerScripts
 {
@@ -13,11 +16,15 @@ namespace PlayerScripts
         private TrailRenderer _trail;
         private BoxCollider2D _circle;
         private Vector3 _lastClickPos = Vector3.zero;
-        
-        
 
+        private SpriteRenderer _instrument;
+
+        public static SlashControlScript Instance;
+        
         private void Awake()
         {
+            Instance = this;
+            _instrument = GetComponentInChildren<SpriteRenderer>();
             _trail = GetComponent<TrailRenderer>();
             _circle = GetComponent<BoxCollider2D>();
         }
@@ -28,10 +35,13 @@ namespace PlayerScripts
                 checkOS = WindowsCheck;
             else
                 checkOS = AndroidCheck;
+            StartCoroutine(InstrumentRotateRoutine());
         }
 
         private void Update()
         {
+            if (PauseScript.IsPaused)
+                return;
             checkOS();
         }
 
@@ -41,6 +51,7 @@ namespace PlayerScripts
             {
                 _trail.emitting = false;
                 _circle.enabled = false;
+                _instrument.enabled = false;
                 _lastClickPos = Vector3.zero;
                 return;
             }
@@ -53,6 +64,7 @@ namespace PlayerScripts
             {
                 _trail.emitting = true;
                 _circle.enabled = true;
+                _instrument.enabled = true;
             }
 
             _lastClickPos = pos;
@@ -64,6 +76,7 @@ namespace PlayerScripts
             {
                 _trail.emitting = false;
                 _circle.enabled = false;
+                _instrument.enabled = false;
                 _lastClickPos = Vector3.zero;
                 return;
             }
@@ -76,9 +89,50 @@ namespace PlayerScripts
             {
                 _trail.emitting = true;
                 _circle.enabled = true;
+                _instrument.enabled = true;
             }
             
             _lastClickPos = pos;
+        }
+
+        private IEnumerator InstrumentRotateRoutine()
+        {
+            float t = 0;
+            
+            float minAngle = 65;
+            float maxAngle = 115;
+            
+            Vector3 startVec = Vector3.zero;
+            Vector3 endVec = Vector3.zero;
+            
+            startVec.z = minAngle;
+            endVec.z = maxAngle;
+            while (true)
+            {
+                t = 0;
+                while (t < 1)
+                {
+                    
+                    _instrument.transform.eulerAngles = Vector3.Lerp(startVec, endVec, t);
+                    t += Time.fixedDeltaTime * 6;
+                    yield return null;
+                }
+
+                t = 0;
+                while (t <1)
+                {
+                    _instrument.transform.eulerAngles = Vector3.Lerp(endVec, startVec, t);
+                    t += Time.fixedDeltaTime * 6;
+                    yield return null;
+                }
+            }
+        }
+
+        public void DisableSlasher()
+        {
+            _trail.emitting = false;
+            _circle.enabled = false;
+            _instrument.enabled = false;
         }
     }
 }
