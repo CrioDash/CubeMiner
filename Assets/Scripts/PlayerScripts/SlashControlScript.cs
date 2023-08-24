@@ -19,11 +19,8 @@ namespace PlayerScripts
 
         private SpriteRenderer _instrument;
 
-        public static SlashControlScript Instance;
-        
         private void Awake()
         {
-            Instance = this;
             _instrument = GetComponentInChildren<SpriteRenderer>();
             _trail = GetComponent<TrailRenderer>();
             _circle = GetComponent<BoxCollider2D>();
@@ -36,6 +33,16 @@ namespace PlayerScripts
             else
                 checkOS = AndroidCheck;
             StartCoroutine(InstrumentRotateRoutine());
+        }
+
+        private void OnEnable()
+        {
+            EventBus.Subscribe(EventBus.EventType.GAME_PAUSE, DisableSlasher);
+        }
+
+        private void OnDisable()
+        {
+            EventBus.Unsubscribe(EventBus.EventType.GAME_PAUSE, DisableSlasher);
         }
 
         private void Update()

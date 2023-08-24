@@ -71,7 +71,7 @@ public class SpriteCutter : MonoBehaviour
         if (cutPoints[0].y == cutPoints[1].y)
             cutPoints[0] = new Vector2(cutPoints[0].x, cutPoints[0].y*-1);
 
-    List<Vector2> tempPoints = cutPoints;
+        List<Vector2> tempPoints = cutPoints;
         for (int i = 0; i < vertices.Length; i++)
         {
             if (tempPoints.Count != 1)
@@ -103,9 +103,7 @@ public class SpriteCutter : MonoBehaviour
 
         CopyGameObject(firstMesh, mat, velocity, obj, cutPoints.ToArray());
         CopyGameObject(secondMesh, mat, velocity, obj, cutPoints.ToArray());
-        
-        Variables.Score += 100;
-        
+
         Destroy(obj.gameObject);
 
     }
@@ -174,6 +172,7 @@ public class SpriteCutter : MonoBehaviour
     {
         
         GameObject gameObject = new GameObject();
+        gameObject.layer = LayerMask.NameToLayer("Fruit");
         Vector3 pos = orig.transform.position;
         pos.z -= 1;
         gameObject.transform.position = pos;

@@ -33,7 +33,9 @@ public class SceneSwitcher : MonoBehaviour
 
     public void LoadScene(string name)
     {
-        Variables.Score = 0;
+        StopAllCoroutines();
+        if(name == "PlayScene")
+            Variables.ResetStats(); 
         StartCoroutine(LoadSceneRoutine(name));
     }
 
