@@ -67,7 +67,7 @@ namespace PlayerScripts
             pos.z = 0;
             transform.position = pos;
 
-            if (_lastClickPos != Vector3.zero && Math.Abs((_lastClickPos - pos).magnitude) > 0.01f)
+            if (_lastClickPos != Vector3.zero && Math.Abs((_lastClickPos - pos).magnitude) > 0.1f)
             {
                 _trail.emitting = true;
                 _circle.enabled = true;

@@ -39,7 +39,7 @@ namespace Fruit
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Barrier"))
+            if (other.CompareTag("Barrier") && CurrentHealth > 0)
             {
                 EventBus.Publish(EventBus.EventType.TAKE_DAMAGE);
                 Destroy(gameObject);
@@ -61,19 +61,30 @@ namespace Fruit
             if (CurrentHealth <= 0)
             {
                 Variables.Score += Reward;
+                Variables.BlocksCut++;
                 SpriteCutter.Instance.Cut(points, gameObject);
             }
         }
 
-        private void DealDamage(float angle)
+        public void DealDamage(float angle)
         {
             
             CurrentHealth -= Variables.Damage;
             if (CurrentHealth > 0)
             {
-                _body.AddForce(new Vector2(Random.Range(750, 1500)*-Mathf.Cos(angle), Random.Range(750, 1500)));
+                _body.AddForce(new Vector2(Random.Range(750, 1500)*-Mathf.Cos(angle), Math.Abs(1500*Mathf.Sin(angle))));
                 _body.AddTorque(1, ForceMode2D.Impulse);
             }
+        }
+        
+        public void ExplosiveDamage(int expPower, float angle)
+        {
+            
+            CurrentHealth -= 1000;
+            _body.AddForce(new Vector2(expPower*Mathf.Cos(angle), expPower*Mathf.Sin(angle)));
+            _body.AddTorque(1, ForceMode2D.Impulse);
+            GetComponent<BoxCollider2D>().enabled = false;
+            Destroy(gameObject,2f);
         }
 
         public void SetStats(BlockType type)

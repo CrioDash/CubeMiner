@@ -8,6 +8,7 @@ namespace Utilities
         public enum EventType
         {
             TAKE_DAMAGE,
+            CHANGE_BLOCK,
             GAME_START,
             GAME_END,
             GAME_PAUSE

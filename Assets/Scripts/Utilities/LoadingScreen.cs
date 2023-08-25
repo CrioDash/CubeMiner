@@ -30,6 +30,8 @@ namespace Utilities
 
         private IEnumerator FadeRoutine()
         {
+            if(!PauseScript.IsPaused)
+                PauseScript.SetPause();
             float t = 0;
             while (t < 1)
             {

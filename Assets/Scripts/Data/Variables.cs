@@ -14,6 +14,7 @@ namespace Data
         public static int CurrentHealth = 0;
 
         public static int Score = 0;
+        public static int BlocksCut = 0;
         
         //BlockStats
 
@@ -29,6 +30,7 @@ namespace Data
         {
             CurrentHealth = 0;
             Score = 0;
+            BlocksCut = 0;
         }
     }
 }
