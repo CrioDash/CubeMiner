@@ -62,7 +62,7 @@ namespace Fruit
             {
                 Variables.Score += Reward;
                 Variables.BlocksCut++;
-                SpriteCutter.Instance.Cut(points, gameObject);
+                SpriteCutter.Instance.CutFruit(points, gameObject);
             }
         }
 

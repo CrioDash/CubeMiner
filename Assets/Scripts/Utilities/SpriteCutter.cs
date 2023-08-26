@@ -19,7 +19,67 @@ public class SpriteCutter : MonoBehaviour
         Instance = this;
     }
 
-    public void Cut(List<Vector2> cutPoints, GameObject obj)
+    public GameObject[] CutTnt(GameObject obj)
+    {
+        Mesh[] meshes = new Mesh[5];
+        for(int i =0; i < 5;i++)
+        {
+            meshes[i] = new Mesh();
+        }
+        
+        SpriteRenderer rend = obj.GetComponent<SpriteRenderer>();
+
+        rend.enabled = false;
+
+        obj.GetComponent<BoxCollider2D>().enabled = false;
+        
+        Material mat = rend.material;
+        mat.mainTexture = rend.sprite.texture;
+
+        Vector2 min = rend.sprite.bounds.min;
+        Vector2 max = rend.sprite.bounds.max;
+        
+        Vector3[][] vertices = new Vector3[5][];
+        for(int i = 0; i<vertices.GetLength(0); i++)
+        {
+            vertices[i] = new Vector3[3];
+        }
+
+        float[] angles = new float[5];
+        for (int i = 0; i < 5; i++)
+        {
+            angles[i] = Mathf.Deg2Rad*i * 360 / 5;
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            vertices[i][0] = Vector3.zero;
+            vertices[i][1] = new Vector3(max.x * Mathf.Cos(angles[i]), max.y * Mathf.Sin(angles[i]), 0);
+            if(i==4)
+                vertices[i][2] = new Vector3(max.x * Mathf.Cos(angles[0]), max.y * Mathf.Sin(angles[0]), 0);
+            else
+                vertices[i][2] = new Vector3(max.x * Mathf.Cos(angles[i+1]), max.y * Mathf.Sin(angles[i+1]), 0);
+        }
+
+        GameObject[] objects = new GameObject[5];
+        for(int i = 0; i<meshes.Length;i++)
+        {
+            float angle;
+            if(i==meshes.Length-1)
+                angle =(angles[i] + Mathf.Deg2Rad*360) / 2;
+            else
+                angle = (angles[i] + angles[i + 1]) / 2;
+            Vector2 velocity = new Vector2(150 * Mathf.Cos(angle), 150 * Mathf.Sin(angle));
+            SetupMesh(meshes[i], vertices[i], max);
+            objects[i] = CopyGameObject(meshes[i], mat, obj, velocity,false);
+            objects[i].transform.localScale *= 1.25f;
+        }
+
+        return objects;
+
+    }
+
+    public void CutFruit(List<Vector2> cutPoints, GameObject obj)
     {
         ParticleSystem system = obj.GetComponentInChildren<ParticleSystem>();
 
@@ -101,8 +161,8 @@ public class SpriteCutter : MonoBehaviour
 
         Vector2 velocity = obj.GetComponent<Rigidbody2D>().velocity;
 
-        CopyGameObject(firstMesh, mat, velocity, obj, cutPoints.ToArray());
-        CopyGameObject(secondMesh, mat, velocity, obj, cutPoints.ToArray());
+        CopyGameObject(firstMesh, mat, obj, Vector2.zero,true);
+        CopyGameObject(secondMesh, mat, obj, Vector2.zero,true);
 
         Destroy(obj.gameObject);
 
@@ -168,10 +228,11 @@ public class SpriteCutter : MonoBehaviour
         mesh.RecalculateNormals();
     }
 
-    private void CopyGameObject(Mesh mesh, Material mat, Vector2 velocity, GameObject orig, Vector2[] cutPoints)
+    private GameObject CopyGameObject(Mesh mesh, Material mat, GameObject orig, Vector2 force, bool fade)
     {
         
         GameObject gameObject = new GameObject();
+        gameObject.name = orig.name;
         gameObject.layer = LayerMask.NameToLayer("Fruit");
         Vector3 pos = orig.transform.position;
         pos.z -= 1;
@@ -187,13 +248,21 @@ public class SpriteCutter : MonoBehaviour
         renderer.material = mat;
 
         Rigidbody2D body = gameObject.AddComponent(typeof(Rigidbody2D)) as Rigidbody2D;
-        body.velocity = velocity;
-        
-        body.AddForce(new Vector2(Random.Range(-750, 750), Random.Range(-1500, -900)));
-        body.AddTorque(5, ForceMode2D.Impulse);
 
-        StartCoroutine(CuttersFadeRoutine(renderer));
+        if (force == Vector2.zero)
+        {
+            body.AddForce(new Vector2(Random.Range(-750, 750), Random.Range(-1500, -900)));
+            body.AddTorque(5, ForceMode2D.Impulse);
+        }
+        else
+        {
+            body.AddForce(force);
+        }
 
+        if(fade)
+            StartCoroutine(CuttersFadeRoutine(renderer));
+
+        return gameObject;
     }
 
     Vector3 ClosestPoint(Vector3 p, Vector2 min, Vector2 max)

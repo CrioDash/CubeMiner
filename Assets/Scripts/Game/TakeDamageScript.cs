@@ -35,10 +35,11 @@ namespace Game
 
         private void TakeDamage()
         {
+            _source.Play();
 
             if (Variables.CurrentHealth == Variables.MaxHealth)
             {
-                SceneSwitcher.Instance.LoadScene("MenuScene");
+                EventBus.Publish(EventBus.EventType.GAME_END);
                 return;
             }
             
@@ -54,7 +55,7 @@ namespace Game
            
             UpdateRestoring();
             
-            _source.Play();
+           
         }
 
         private void ReleafDamage()

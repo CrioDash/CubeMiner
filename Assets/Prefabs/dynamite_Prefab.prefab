@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9195482421443824739}
   - component: {fileID: 8217844981973256919}
   - component: {fileID: 7206526294027995699}
-  - component: {fileID: 4816066057063069656}
+  - component: {fileID: 7143860403843888805}
   m_Layer: 6
   m_Name: Particle System
   m_TagString: Untagged
@@ -42,7 +42,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2205327198366116732}
   serializedVersion: 8
-  lengthInSec: 0.25
+  lengthInSec: 0.5
   simulationSpeed: 1
   stopAction: 2
   cullingMode: 0
@@ -117,7 +117,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -288,7 +288,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 7.5
+      scalar: 7
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1326,7 +1326,7 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 65535
+        atime1: 49922
         atime2: 0
         atime3: 0
         atime4: 0
@@ -4829,7 +4829,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!82 &4816066057063069656
+--- !u!82 &7143860403843888805
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4838,10 +4838,10 @@ AudioSource:
   m_GameObject: {fileID: 2205327198366116732}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 3659238eb448c7147bd59d93605ea843, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 054c7ea1ec25b774e9954adcb0f29ccf, type: 3}
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d25191f8a41135a468915ab8b2a2ea54, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5001,7 +5001,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 79a809ac4ba56a04faf2010100bec750, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

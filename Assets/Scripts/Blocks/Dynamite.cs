@@ -18,10 +18,16 @@ namespace Fruit
             if(other.CompareTag("Player"))
                 Slice();
         }
-        
+
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            if (col.CompareTag("Barrier"))
+                Destroy(gameObject);
+        }
+
         public void Slice()
         {
-            StartCoroutine(ExplodeRoutine());
+            StartCoroutine(ExplodeRoutine(SpriteCutter.Instance.CutTnt(gameObject)));
         }
 
         private void OnMouseUpAsButton()
@@ -36,6 +42,8 @@ namespace Fruit
 
         private void Explode()
         {
+            Handheld.Vibrate();
+
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
             Debug.Log(colliders.Length);
             
@@ -49,6 +57,9 @@ namespace Fruit
             }
             
             ParticleSystem system = GetComponentInChildren<ParticleSystem>();
+            
+            GetComponentInChildren<AudioSource>().Play();
+            
             system.transform.SetParent(null);
             system.transform.localScale = Vector3.one;
             system.Play();
@@ -59,17 +70,40 @@ namespace Fruit
             Destroy(gameObject);
         }
 
-        private IEnumerator ExplodeRoutine()
+        private IEnumerator ExplodeRoutine(GameObject[] objects)
         {
             Variables.CurrentHealth = 0;
-            PauseScript.SetPause();
-            float t = 0;
-            while (t<6)
+            
+            AudioSource parentSource = GetComponentInChildren<AudioSource>();
+            ParticleSystem parentSystem = GetComponentInChildren<ParticleSystem>();
+            WaitForSeconds wait = new WaitForSeconds(0.15f);
+
+            yield return new WaitForSeconds(0.25f);
+
+            foreach (GameObject obj in objects)
             {
+                Handheld.Vibrate();
+                
+                ParticleSystem system = Instantiate(parentSystem.gameObject, obj.transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+
+                obj.GetComponent<MeshRenderer>().enabled = false;
+                
+                AudioSource source = system.AddComponent<AudioSource>();
+
+                source.clip = parentSource.clip;
+                source.volume = 1f;
+                source.Play();
+
+                system.transform.localScale /= 3;
+                
+                system.Play();
+                
                 EventBus.Publish(EventBus.EventType.TAKE_DAMAGE);
-                yield return new WaitForSecondsRealtime(0.35f);
-                t += 1;
+
+                yield return wait;
             }
+            EventBus.Publish(EventBus.EventType.TAKE_DAMAGE);
+            
         }
 
         private void OnDrawGizmosSelected()

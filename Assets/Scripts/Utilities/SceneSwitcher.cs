@@ -24,6 +24,16 @@ public class SceneSwitcher : MonoBehaviour
         _buttonsController = GetComponentInChildren<ButtonsController>();
     }
 
+    private void OnEnable()
+    {
+        EventBus.Subscribe(EventBus.EventType.GAME_END, () => LoadScene("MenuScene"));
+    }
+
+    private void OnDisable()
+    {
+        EventBus.Unsubscribe(EventBus.EventType.GAME_END, () => LoadScene("MenuScene"));
+    }
+
     void Start()
     {
         DontDestroyOnLoad(this);
