@@ -81,29 +81,12 @@ public class SpriteCutter : MonoBehaviour
 
     public void CutFruit(List<Vector2> cutPoints, GameObject obj)
     {
-        ParticleSystem system = obj.GetComponentInChildren<ParticleSystem>();
-
         obj.GetComponentInChildren<Rigidbody2D>().WakeUp();
 
         SpriteRenderer rend = obj.GetComponent<SpriteRenderer>();
         
-        system.gameObject.GetComponent<AudioSource>().Play();
-        
-        system.gameObject.GetComponent<ParticleSystemRenderer>().material = rend.material;
-        system.Play();
-        system.transform.SetParent(null);
-        Vector3 pos = obj.transform.position;
-        pos.z -= 1;
-        pos.y -= 1;
-        system.transform.position = pos;
-        system.transform.localScale = Vector3.one;
-        
-        
-
         Mesh firstMesh = new Mesh();
         Mesh secondMesh = new Mesh();
-
-       
         
         Material mat = rend.material;
         mat.mainTexture = rend.sprite.texture;
@@ -251,7 +234,7 @@ public class SpriteCutter : MonoBehaviour
 
         if (force == Vector2.zero)
         {
-            body.AddForce(new Vector2(Random.Range(-750, 750), Random.Range(-1500, -900)));
+            body.AddForce(new Vector2(Random.Range(-350, 350), Random.Range(-400, -250)));
             body.AddTorque(5, ForceMode2D.Impulse);
         }
         else
@@ -320,7 +303,7 @@ public class SpriteCutter : MonoBehaviour
         while (t < 1)
         {
             rend.material.color = Color.Lerp(Color.white, clear, t);
-            t += Time.fixedDeltaTime*2;
+            t += Time.fixedDeltaTime*1.5f;
             yield return new WaitForSeconds(Time.deltaTime);
         }
         Destroy(rend.gameObject);

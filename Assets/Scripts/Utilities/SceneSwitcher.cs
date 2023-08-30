@@ -38,11 +38,11 @@ public class SceneSwitcher : MonoBehaviour
     {
         DontDestroyOnLoad(this);
         Application.targetFrameRate = Int32.MaxValue;
-        Time.fixedDeltaTime = 0.008f;
     }
 
     public void LoadScene(string name)
     {
+        EventBus.Publish(EventBus.EventType.GAME_SAVE);
         StopAllCoroutines();
         if(name == "PlayScene")
             Variables.ResetStats(); 

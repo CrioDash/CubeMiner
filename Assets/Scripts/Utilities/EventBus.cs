@@ -8,10 +8,12 @@ namespace Utilities
         public enum EventType
         {
             TAKE_DAMAGE,
+            SPAWN_DYNAMITE,
             CHANGE_BLOCK,
             GAME_START,
             GAME_END,
-            GAME_PAUSE
+            GAME_PAUSE,
+            GAME_SAVE
         }
 
         public static Dictionary<EventType, UnityEvent> Events = new Dictionary<EventType, UnityEvent>();

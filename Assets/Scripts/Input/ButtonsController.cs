@@ -31,7 +31,6 @@ namespace Input
                 if(s == LastAction.name)
                     continue;
                 PlayerInputAsset.FindAction(s).Disable();
-                Debug.Log(PlayerInputAsset.FindAction(s));
             }
         }
         

@@ -62,6 +62,24 @@ namespace Fruit
             {
                 Variables.Score += Reward;
                 Variables.BlocksCut++;
+                
+                ParticleSystem system = GetComponentInChildren<ParticleSystem>();
+                
+                system.transform.SetParent(null);
+                
+                Vector3 pos = transform.position;
+                pos.z -= 1;
+                pos.y -= 1;
+                system.transform.position = pos;
+                system.transform.localScale = Vector3.one;
+                
+                system.gameObject.GetComponent<AudioSource>().Play();
+        
+                system.gameObject.GetComponent<ParticleSystemRenderer>().material = GetComponent<SpriteRenderer>().material;
+                system.Play();
+                
+                
+                
                 SpriteCutter.Instance.CutFruit(points, gameObject);
             }
         }
@@ -72,7 +90,7 @@ namespace Fruit
             CurrentHealth -= Variables.Damage;
             if (CurrentHealth > 0)
             {
-                _body.AddForce(new Vector2(Random.Range(750, 1500)*-Mathf.Cos(angle), Math.Abs(1500*Mathf.Sin(angle))));
+                _body.AddForce(new Vector2(Random.Range(250, 350)*-Mathf.Cos(angle), Math.Abs(750*Mathf.Sin(angle))));
                 _body.AddTorque(1, ForceMode2D.Impulse);
             }
         }

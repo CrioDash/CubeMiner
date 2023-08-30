@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Data;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -28,6 +29,9 @@ namespace PlayerScripts
 
         private void Start()
         {
+
+            _instrument.sprite = Variables.ToolInfo[PlayerSave.Instance.Tool].Sprite;
+            
             if (Application.platform != RuntimePlatform.Android)
                 checkOS = WindowsCheck;
             else
@@ -121,7 +125,7 @@ namespace PlayerScripts
                 {
                     
                     _instrument.transform.eulerAngles = Vector3.Lerp(startVec, endVec, t);
-                    t += Time.fixedDeltaTime * 6;
+                    t += Time.fixedDeltaTime * 2;
                     yield return null;
                 }
 
@@ -129,7 +133,7 @@ namespace PlayerScripts
                 while (t <1)
                 {
                     _instrument.transform.eulerAngles = Vector3.Lerp(endVec, startVec, t);
-                    t += Time.fixedDeltaTime * 6;
+                    t += Time.fixedDeltaTime * 2;
                     yield return null;
                 }
             }

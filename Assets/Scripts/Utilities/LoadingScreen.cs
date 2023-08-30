@@ -56,6 +56,7 @@ namespace Utilities
             IsFade = false;
             if(PauseScript.IsPaused)
                 PauseScript.SetPause();
+            EventBus.Publish(EventBus.EventType.GAME_START);
         }
         
     }

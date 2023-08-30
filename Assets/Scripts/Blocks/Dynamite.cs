@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Data;
 using Unity.VisualScripting;
 using UnityEngine;
 using Utilities;
@@ -42,11 +43,20 @@ namespace Fruit
 
         private void Explode()
         {
+
+            if (PauseScript.IsPaused)
+            {
+                PlayerSave.Instance.TutorialCompleted = true;
+                PauseScript.SetPause();
+            }
+
+            if(!PlayerSave.Instance.TutorialCompleted)
+                    return;
+            
             Handheld.Vibrate();
 
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
-            Debug.Log(colliders.Length);
-            
+
             foreach (Collider2D col in colliders)
             {
                 if (!col.CompareTag("Fruit"))
@@ -72,6 +82,9 @@ namespace Fruit
 
         private IEnumerator ExplodeRoutine(GameObject[] objects)
         {
+            if(!PlayerSave.Instance.TutorialCompleted)
+                yield break;
+            
             Variables.CurrentHealth = 0;
             
             AudioSource parentSource = GetComponentInChildren<AudioSource>();

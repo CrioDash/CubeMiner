@@ -99,13 +99,15 @@ public class BlockSpawner : MonoBehaviour
                 Vector3 pos = spawnPos;
                 pos.x *= -1;
                 GameObject gm = Instantiate(dynamitePrefab, pos, Quaternion.identity);
-                gm.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(75, 150)*mult, -currentFallSpeed));
+                gm.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(35, 70)*mult, -currentFallSpeed));
+                
+                EventBus.Publish(EventBus.EventType.SPAWN_DYNAMITE);
             }
             
             Block block = Instantiate(cubePrefab, spawnPos, Quaternion.identity).GetComponent<Block>();
             block.SetStats(currentType);
             
-            block.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(75, 150)*mult*-1, -currentFallSpeed));
+            block.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(35, 70)*mult*-1, -currentFallSpeed));
             
             yield return wait;
         }

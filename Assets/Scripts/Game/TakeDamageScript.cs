@@ -51,7 +51,6 @@ namespace Game
             
             Variables.CurrentHealth++;
             
-            Debug.Log("Damaged: " + Variables.CurrentHealth);
            
             UpdateRestoring();
             
@@ -61,8 +60,6 @@ namespace Game
         private void ReleafDamage()
         {
             Variables.CurrentHealth -= 1;
-            
-            Debug.Log("Healed: " + Variables.CurrentHealth);
 
             if (Variables.CurrentHealth == 0)
                 _image.color = Color.clear;

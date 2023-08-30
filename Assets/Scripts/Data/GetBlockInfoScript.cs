@@ -9,7 +9,7 @@ namespace Data
         private void Start()
         {
             Variables.BlockInfo = new Dictionary<Variables.BlockType, BlockInfo>();
-            BlockInfo[] info = Resources.LoadAll<BlockInfo>("");
+            BlockInfo[] info = Resources.LoadAll<BlockInfo>("Blocks/");
             for(int i=0;i<info.Length;i++)
             {
                 Variables.BlockInfo.Add((Variables.BlockType)i, info[i]);
