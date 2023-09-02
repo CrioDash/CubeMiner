@@ -28,6 +28,8 @@ namespace Fruit
 
         public void Slice()
         {
+            if(!PlayerSave.Instance.TutorialCompleted)
+                return;
             StartCoroutine(ExplodeRoutine(SpriteCutter.Instance.CutTnt(gameObject)));
         }
 
@@ -56,11 +58,13 @@ namespace Fruit
             Handheld.Vibrate();
 
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+            
 
             foreach (Collider2D col in colliders)
             {
                 if (!col.CompareTag("Fruit"))
                     continue;
+                Variables.BlocksFall --;
                 float angle = Mathf.Atan2(col.transform.position.y - transform.position.y,
                     col.transform.position.x - transform.position.x);
                 col.GetComponent<Block>().ExplosiveDamage(explosionPower, angle);
@@ -75,16 +79,14 @@ namespace Fruit
             system.Play();
 
             EventBus.Publish(EventBus.EventType.CHANGE_BLOCK);
-            Variables.BlocksCut = 0;
+            BlockSpawner.BlocksCut = 0;
             
             Destroy(gameObject);
         }
 
         private IEnumerator ExplodeRoutine(GameObject[] objects)
         {
-            if(!PlayerSave.Instance.TutorialCompleted)
-                yield break;
-            
+
             Variables.CurrentHealth = 0;
             
             AudioSource parentSource = GetComponentInChildren<AudioSource>();
@@ -93,24 +95,23 @@ namespace Fruit
 
             yield return new WaitForSeconds(0.25f);
 
+            ParticleSystem system = Instantiate(parentSystem.gameObject, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+            system.transform.localScale /= 3;
+            system.Play();
+            AudioSource source = system.AddComponent<AudioSource>();
+
+            source.clip = parentSource.clip;
+            source.volume = 1f;
+            
             foreach (GameObject obj in objects)
             {
                 Handheld.Vibrate();
-                
-                ParticleSystem system = Instantiate(parentSystem.gameObject, obj.transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
 
                 obj.GetComponent<MeshRenderer>().enabled = false;
                 
-                AudioSource source = system.AddComponent<AudioSource>();
-
-                source.clip = parentSource.clip;
-                source.volume = 1f;
+                
                 source.Play();
 
-                system.transform.localScale /= 3;
-                
-                system.Play();
-                
                 EventBus.Publish(EventBus.EventType.TAKE_DAMAGE);
 
                 yield return wait;

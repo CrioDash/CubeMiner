@@ -216,7 +216,7 @@ public class SpriteCutter : MonoBehaviour
         
         GameObject gameObject = new GameObject();
         gameObject.name = orig.name;
-        gameObject.layer = LayerMask.NameToLayer("Fruit");
+        gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
         Vector3 pos = orig.transform.position;
         pos.z -= 1;
         gameObject.transform.position = pos;

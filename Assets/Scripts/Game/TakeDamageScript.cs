@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
+using Utilities;
 using EventBus = Utilities.EventBus;
 using Variables = Data.Variables;
 
@@ -26,18 +27,20 @@ namespace Game
         private void OnEnable()
         {
             EventBus.Subscribe(EventBus.EventType.TAKE_DAMAGE, TakeDamage);
+            EventBus.Subscribe(EventBus.EventType.GAME_END, PauseScript.SetPause);
         }
 
         private void OnDisable()
         {
             EventBus.Unsubscribe(EventBus.EventType.TAKE_DAMAGE, TakeDamage);
+            EventBus.Unsubscribe(EventBus.EventType.TAKE_DAMAGE, PauseScript.SetPause);
         }
 
         private void TakeDamage()
         {
             _source.Play();
 
-            if (Variables.CurrentHealth == Variables.MaxHealth)
+            if (Variables.CurrentHealth >= Variables.MaxHealth)
             {
                 EventBus.Publish(EventBus.EventType.GAME_END);
                 return;

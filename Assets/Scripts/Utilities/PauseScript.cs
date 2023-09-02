@@ -10,7 +10,7 @@ namespace Utilities
             private set;
             get;
         }
-        
+
         public static void SetPause()
         {
             IsPaused = !IsPaused;

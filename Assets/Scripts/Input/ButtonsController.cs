@@ -5,6 +5,7 @@ using UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using Utilities;
 
 namespace Input
 {
@@ -33,26 +34,44 @@ namespace Input
                 PlayerInputAsset.FindAction(s).Disable();
             }
         }
-        
+
+        private void OnEnable()
+        {
+            EventBus.Subscribe(EventBus.EventType.GAME_PAUSE, DisableControl);
+        }
+
+        private void OnDisable()
+        {
+            EventBus.Unsubscribe(EventBus.EventType.GAME_PAUSE, DisableControl);
+        }
+
 
         #region ControlMethods
-        
-        public void PlaySceneBackButton(InputAction.CallbackContext context)
+
+        private void PlaySceneBackButton(InputAction.CallbackContext context)
         {
             PlayScenePauseWindow.Instance.ChangeWindowState();
         }
-        
-        public void MenuSceneBackButton(InputAction.CallbackContext context)
+
+        private void MenuSceneBackButton(InputAction.CallbackContext context)
         {
             MenuSceneExitWindow.Instance.ChangeWindowState();
         }
-        
-        public void OtherScenesBackButton(InputAction.CallbackContext context)
+
+        private void OtherScenesBackButton(InputAction.CallbackContext context)
         {
             SceneSwitcher.Instance.LoadScene("MenuScene");
         }
         
         #endregion
+
+        private void DisableControl()
+        {
+            if (PauseScript.IsPaused)
+                LastAction.Disable();
+            else
+                LastAction.Enable();
+        }
 
         public void ResetControls(string action)
         {

@@ -19,7 +19,7 @@ namespace UI
 
         private void Update()
         {
-            _text.text = Variables.BlocksCut + "/" + BlockSpawner.currentBlockGoal;
+            _text.text = BlockSpawner.BlocksCut + "/" + BlockSpawner.currentBlockGoal;
         }
     }
 }

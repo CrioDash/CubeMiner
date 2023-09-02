@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Data;
 using Fruit;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
-using Utilities;
+using EventBus = Utilities.EventBus;
 using Random = UnityEngine.Random;
+using Variables = Data.Variables;
 
 public class BlockSpawner : MonoBehaviour
 {
@@ -15,16 +16,17 @@ public class BlockSpawner : MonoBehaviour
     [SerializeField] private GameObject dynamitePrefab;
     
     [SerializeField] private float baseSpawnTime;
-    [SerializeField] private int baseFallSpeed;
+    [SerializeField] private float baseFallSpeed;
     [SerializeField] private int baseBlockGoal;
 
+    public static int BlocksCut = 0;
     public static int currentBlockGoal;
-    public static int currentFallSpeed;
+    public static float currentFallSpeed;
     public static float currentSpawnTime;
     public static Variables.BlockType currentType;
         
     private const float MinSpawnTime = 0.05f;
-    private const int MaxFallSpeed = 1000;
+    private const float MaxFallSpeed = 1000;
     
     private Camera _cam;
    
@@ -66,7 +68,7 @@ public class BlockSpawner : MonoBehaviour
         currentSpawnTime -= 0.05f;
         currentSpawnTime = Mathf.Clamp(currentSpawnTime, MinSpawnTime, float.MaxValue);
 
-        currentFallSpeed += 25;
+        currentFallSpeed += 5f;
         currentFallSpeed = Mathf.Clamp(currentFallSpeed, baseFallSpeed, MaxFallSpeed);
 
         currentType = _types[Random.Range(0, _types.Count)];
@@ -93,16 +95,19 @@ public class BlockSpawner : MonoBehaviour
             
             Vector3 spawnPos = new Vector3(_cam.orthographicSize * _cam.aspect * mult, _cam.orthographicSize+ 1);
 
-            if (Variables.BlocksCut >= currentBlockGoal)
+            if (BlocksCut >= currentBlockGoal)
             {
-                Variables.BlocksCut -= currentBlockGoal;
+                BlocksCut -= currentBlockGoal;
                 Vector3 pos = spawnPos;
                 pos.x *= -1;
+                pos.z = -1;
                 GameObject gm = Instantiate(dynamitePrefab, pos, Quaternion.identity);
                 gm.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(35, 70)*mult, -currentFallSpeed));
                 
                 EventBus.Publish(EventBus.EventType.SPAWN_DYNAMITE);
             }
+
+            Variables.BlocksFall++;
             
             Block block = Instantiate(cubePrefab, spawnPos, Quaternion.identity).GetComponent<Block>();
             block.SetStats(currentType);

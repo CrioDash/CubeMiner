@@ -30,7 +30,7 @@ namespace PlayerScripts
         private void Start()
         {
 
-            _instrument.sprite = Variables.ToolInfo[PlayerSave.Instance.Tool].Sprite;
+            _instrument.sprite = Variables.ToolInfo[PlayerSave.Instance.CurrentTool].Sprite;
             
             if (Application.platform != RuntimePlatform.Android)
                 checkOS = WindowsCheck;
@@ -60,6 +60,7 @@ namespace PlayerScripts
         {
             if (!Touchscreen.current.primaryTouch.isInProgress)
             {
+                
                 _trail.emitting = false;
                 _circle.enabled = false;
                 _instrument.enabled = false;
@@ -71,7 +72,7 @@ namespace PlayerScripts
             pos.z = 0;
             transform.position = pos;
 
-            if (_lastClickPos != Vector3.zero && Math.Abs((_lastClickPos - pos).magnitude) > 0.1f)
+            if (_lastClickPos != Vector3.zero && Math.Abs((_lastClickPos - pos).magnitude) > 0.01f)
             {
                 _trail.emitting = true;
                 _circle.enabled = true;
@@ -83,6 +84,11 @@ namespace PlayerScripts
 
         private void WindowsCheck()
         {
+            Vector3 pos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
+            pos.z = 0;
+            transform.position = pos;
+            
             if (!Mouse.current.leftButton.isPressed)
             {
                 _trail.emitting = false;
@@ -91,10 +97,6 @@ namespace PlayerScripts
                 _lastClickPos = Vector3.zero;
                 return;
             }
-            Vector3 pos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-
-            pos.z = 0;
-            transform.position = pos;
 
             if (_lastClickPos != Vector3.zero && Math.Abs((_lastClickPos - pos).magnitude) > 0.01f)
             {

@@ -14,9 +14,11 @@ namespace Data
         public static int CurrentHealth = 0;
 
         public static int Score = 0;
-        public static int RecordScore = 0;
-        
+
         public static int BlocksCut = 0;
+        public static int BlocksFall = 0;
+
+        public static int BestCombo = 0;
         
         //BlockStats
 
@@ -49,15 +51,17 @@ namespace Data
         
         public static void ResetStats()
         {
+            BestCombo = 0;
             CurrentHealth = 0;
             Score = 0;
             BlocksCut = 0;
+            BlocksFall = 0;
+            BlockSpawner.BlocksCut = 0;
         }
 
         public static void UpdateVariables(PlayerSave save)
         {
-            RecordScore = save.RecordScore;
-            Damage = ToolInfo[PlayerSave.Instance.Tool].Damage;
+            Damage = ToolInfo[PlayerSave.Instance.CurrentTool].Damage;
         }
     }
 }

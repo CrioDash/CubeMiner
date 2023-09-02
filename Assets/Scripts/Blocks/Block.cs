@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Data;
 using Game;
+using PlayerScripts;
+using UI;
 using UnityEngine;
 using Utilities;
 using Random = UnityEngine.Random;
@@ -61,6 +63,9 @@ namespace Fruit
             if (CurrentHealth <= 0)
             {
                 Variables.Score += Reward;
+                Variables.Score = Mathf.Clamp(Variables.Score, 0, 99999999);
+                
+                BlockSpawner.BlocksCut++;
                 Variables.BlocksCut++;
                 
                 ParticleSystem system = GetComponentInChildren<ParticleSystem>();
@@ -77,9 +82,9 @@ namespace Fruit
         
                 system.gameObject.GetComponent<ParticleSystemRenderer>().material = GetComponent<SpriteRenderer>().material;
                 system.Play();
-                
-                
-                
+
+
+                ComboTextScript.comboCount++;
                 SpriteCutter.Instance.CutFruit(points, gameObject);
             }
         }

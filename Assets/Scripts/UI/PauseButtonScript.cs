@@ -17,13 +17,11 @@ namespace UI
 
         private void OnEnable()
         {
-            EventBus.Subscribe(EventBus.EventType.GAME_END, Fade);
             EventBus.Subscribe(EventBus.EventType.GAME_PAUSE, Fade);
         }
 
         private void OnDisable()
         {
-            EventBus.Unsubscribe(EventBus.EventType.GAME_END, Fade);
             EventBus.Unsubscribe(EventBus.EventType.GAME_PAUSE, Fade);
         }
 

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEditor;
 using UnityEngine;
 using static Data.Variables;
 
@@ -15,22 +17,37 @@ namespace Data
         public int RecordScore
         {
             get;
-            private set;
+            set;
         }
-        
-        public ToolType Tool
+
+        public List<ToolType> Tools
+        {
+            get;
+            set;
+        }
+
+        public ToolType CurrentTool
         {
             get;
             private set;
+        }
+
+        public int Money
+        {
+            get;
+            set;
         }
 
         public bool TutorialCompleted { set; get; }
 
         public PlayerSave()
         {
+            Tools = new List<ToolType>();
             TutorialCompleted = false;
             RecordScore = 0;
-            Tool = ToolType.WoodShovel;
+            Money = 0;
+            CurrentTool = ToolType.WoodShovel;
+            Tools.Add(CurrentTool);
         }
         
     }

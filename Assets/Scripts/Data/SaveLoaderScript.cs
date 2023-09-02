@@ -14,7 +14,6 @@ namespace Data
         {
             if(PlayerSave.Instance==null)
                 return;
-            Debug.Log(PlayerSave.Instance.TutorialCompleted);
             using (FileStream file = File.Create(_filepath))
                 new BinaryFormatter().Serialize(file, PlayerSave.Instance);
         }
