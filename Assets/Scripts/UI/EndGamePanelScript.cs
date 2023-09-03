@@ -20,6 +20,8 @@ namespace UI
         [SerializeField] private TextMeshProUGUI textMoney;
         [SerializeField] private TextMeshProUGUI textRecord;
         [SerializeField] private TextMeshProUGUI textAddMoney;
+        [SerializeField] private TextMeshProUGUI textBonusMoney;
+        [SerializeField] private ParticleSystem particleBonus;
         [SerializeField] private Sprite[] MarkList;
 
         private Image _imageBtnOK;
@@ -59,7 +61,6 @@ namespace UI
         private void Update()
         {
             _imageBtnOK.material.SetFloat("_unscaledTime", Time.unscaledTime);
-            Debug.Log(_imageBtnOK.material.GetFloat("_unscaledTime"));
         }
 
         private IEnumerator ShowEndGameRoutine()
@@ -85,14 +86,32 @@ namespace UI
             _group.alpha = 1;
             _group.blocksRaycasts = true;
             
+            int markScore = 0;
+
+            Variables.BestCombo = Mathf.Clamp(Variables.BestCombo, 0, 5);
+            
+            markScore += Variables.BestCombo > 2 ? Variables.BestCombo - 2 : 0;
+            
+            markScore += Mathf.RoundToInt(Mathf.Clamp(((float)Variables.BlocksCut / Variables.BlocksFall) - 0.7f, 0, 1) * 10);
+            
+            
             
             add = "";
             for (int i = 0; i < 8 - PlayerSave.Instance.Money.ToString().Length; i++)
                 add += "0";
             
             textMoney.text = add + PlayerSave.Instance.Money;
+            
+            int money = Mathf.RoundToInt((float)Variables.Score / 1000);
+            int markBonus = Mathf.RoundToInt((float)markScore* money / 20);
 
-            PlayerSave.Instance.Money += Mathf.RoundToInt((float)Variables.Score / 1000);
+            PlayerSave.Instance.Money += money + markBonus;
+            
+            
+            int startMoney = PlayerSave.Instance.Money- money - markBonus;
+            int endMoney = PlayerSave.Instance.Money - markBonus;
+            
+            int moneyShow = startMoney;
 
             #endregion
             
@@ -182,9 +201,7 @@ namespace UI
             endClr = startClr;
             endClr.a = 1;
             
-            int money = Mathf.RoundToInt((float)Variables.Score / 1000);
-            int startMoney = PlayerSave.Instance.Money-money;
-            int endMoney = PlayerSave.Instance.Money;
+           
 
             textAddMoney.text = "+" + money;
 
@@ -199,8 +216,6 @@ namespace UI
 
             textAddMoney.color = endClr;
 
-            int moneyShow = startMoney;
-            
             t = 0;
             
             while (t < 1)
@@ -244,14 +259,6 @@ namespace UI
 
             t = 0;
 
-            int markScore = 0;
-
-            Variables.BestCombo = Mathf.Clamp(Variables.BestCombo, 0, 5);
-            
-            markScore += Variables.BestCombo > 2 ? Variables.BestCombo - 2 : 0;
-            
-            markScore += Mathf.RoundToInt(Mathf.Clamp(((float)Variables.BlocksCut / Variables.BlocksFall) - 0.7f, 0, 1) * 10);
-
             imageMark.transform.position = Vector3.zero;
             imageMark.transform.localScale = Vector3.one * 15;
             
@@ -274,8 +281,62 @@ namespace UI
             imageMark.transform.localScale = Vector3.one;
 
                 #endregion
+
+            yield return new WaitForSecondsRealtime(0.25f);
+
+            #region BonusMoney
+
+            if(markBonus==0)
+                yield break;
             
+            t = 0;
+
+            textBonusMoney.text = "+" + markBonus;
             
+            startClr = textBonusMoney.color;
+            startClr.a = 1;
+            textBonusMoney.color = startClr;
+
+            startPos = textBonusMoney.transform.position;
+            endPos = textMoney.transform.position;
+
+            while (t < 1)
+            {
+                textBonusMoney.transform.position = Vector3.Slerp(startPos,endPos, animCurve.Evaluate(t));
+                t += Time.unscaledDeltaTime*1.5f;
+                yield return null;
+            }
+
+            textBonusMoney.transform.position = endPos;
+            
+            textBonusMoney.color = Color.clear;
+
+            particleBonus.Play();
+
+            t = 0;
+
+            startMoney = Int32.Parse(textMoney.text);
+            endMoney = startMoney + markBonus;
+
+            while (t < 1)
+            {
+                moneyShow = Mathf.RoundToInt(Mathf.Lerp(startMoney, endMoney, t));
+                add = "";
+                for (int i = 0; i < 8 - moneyShow.ToString().Length; i++)
+                    add += "0";
+                textMoney.text = add + moneyShow;
+                t += Time.unscaledDeltaTime;
+                yield return null;
+            }
+
+            moneyShow = endMoney;
+            add = "";
+            for (int i = 0; i < 8 - moneyShow.ToString().Length; i++)
+                add += "0";
+            textMoney.text = add + moneyShow;
+
+            #endregion
+
         }
         
     }

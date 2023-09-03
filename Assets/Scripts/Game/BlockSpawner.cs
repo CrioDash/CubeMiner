@@ -14,6 +14,9 @@ public class BlockSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject cubePrefab;
     [SerializeField] private GameObject dynamitePrefab;
+    [SerializeField] private GameObject chestPrefab;
+
+    [SerializeField] private int chestSpawnChance;
     
     [SerializeField] private float baseSpawnTime;
     [SerializeField] private float baseFallSpeed;
@@ -107,12 +110,22 @@ public class BlockSpawner : MonoBehaviour
                 EventBus.Publish(EventBus.EventType.SPAWN_DYNAMITE);
             }
 
+            if (Random.Range(1, 100/chestSpawnChance + 1) == 1)
+            {
+                Vector3 pos = spawnPos;
+                pos.x *= -1;
+                pos.z = -1;
+                GameObject gm = Instantiate(chestPrefab, pos, Quaternion.identity);
+                gm.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(35, 70)*mult, -currentFallSpeed));
+            }
+
             Variables.BlocksFall++;
             
             Block block = Instantiate(cubePrefab, spawnPos, Quaternion.identity).GetComponent<Block>();
             block.SetStats(currentType);
             
             block.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(35, 70)*mult*-1, -currentFallSpeed));
+            block.GetComponent<Rigidbody2D>().AddTorque(1, ForceMode2D.Impulse);
             
             yield return wait;
         }

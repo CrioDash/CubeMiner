@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _reward: 200
   _health: 2
-  _sprite: {fileID: 21300000, guid: 151c5892f8ea0da4cb20e296b498b919, type: 3}
+  _sprite: {fileID: 21300000, guid: a2c931b5c23c9884598f4af3461f6629, type: 3}
   _clip: {fileID: 8300000, guid: 5c4e13e54e015fc42b1a59ef56e69acb, type: 3}
