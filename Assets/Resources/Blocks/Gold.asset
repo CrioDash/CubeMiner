@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d940a90d5bc45f39e44e06e658b8386, type: 3}
   m_Name: Gold
   m_EditorClassIdentifier: 
-  _reward: 300
+  _rewardScore: 300
+  _rewardMoney: 3
   _health: 3
   _sprite: {fileID: 21300000, guid: bccc0f9cbba1a244190994ab7fe54057, type: 3}
   _clip: {fileID: 8300000, guid: d02cc81db25b97849b87410063a3cd8d, type: 3}

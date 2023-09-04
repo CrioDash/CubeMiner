@@ -18,6 +18,7 @@ namespace UI
         [SerializeField] private Image imageMark;
         [SerializeField] private TextMeshProUGUI textScore;
         [SerializeField] private TextMeshProUGUI textMoney;
+        [SerializeField] private TextMeshProUGUI textBlocks;
         [SerializeField] private TextMeshProUGUI textRecord;
         [SerializeField] private TextMeshProUGUI textAddMoney;
         [SerializeField] private TextMeshProUGUI textBonusMoney;
@@ -93,22 +94,21 @@ namespace UI
             markScore += Variables.BestCombo > 2 ? Variables.BestCombo - 2 : 0;
             
             markScore += Mathf.RoundToInt(Mathf.Clamp(((float)Variables.BlocksCut / Variables.BlocksFall) - 0.7f, 0, 1) * 10);
-            
-            
-            
-            add = "";
+
+            textBlocks.text = "0/" + Variables.BlocksFall;
+
+                add = "";
             for (int i = 0; i < 8 - PlayerSave.Instance.Money.ToString().Length; i++)
                 add += "0";
             
             textMoney.text = add + PlayerSave.Instance.Money;
             
-            int money = Mathf.RoundToInt((float)Variables.Score / 1000);
-            int markBonus = Mathf.RoundToInt((float)markScore* money / 20);
+            int markBonus = Mathf.RoundToInt((float)markScore* Variables.Money / 20);
 
-            PlayerSave.Instance.Money += money + markBonus;
+            PlayerSave.Instance.Money += Variables.Money + markBonus;
             
             
-            int startMoney = PlayerSave.Instance.Money- money - markBonus;
+            int startMoney = PlayerSave.Instance.Money- Variables.Money - markBonus;
             int endMoney = PlayerSave.Instance.Money - markBonus;
             
             int moneyShow = startMoney;
@@ -203,7 +203,7 @@ namespace UI
             
            
 
-            textAddMoney.text = "+" + money;
+            textAddMoney.text = "+" + Variables.Money;
 
             t = 0;
             
@@ -251,7 +251,23 @@ namespace UI
             textAddMoney.color = startClr;
 
                 #endregion
+
+            yield return new WaitForSecondsRealtime(0.25f);
+
+            #region BlocksScore
+
+            t = 0;
             
+            while (t < 1)
+            {
+                textBlocks.text = Mathf.RoundToInt(Mathf.Lerp(0, Variables.BlocksCut, t)) + "/" + Variables.BlocksFall; 
+                t += Time.unscaledDeltaTime;
+                yield return null;
+            }
+
+            textBlocks.text = Variables.BlocksCut + "/" + Variables.BlocksFall;
+            
+                #endregion
             
             yield return new WaitForSecondsRealtime(0.25f);
 

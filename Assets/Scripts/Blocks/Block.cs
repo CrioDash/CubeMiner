@@ -15,7 +15,9 @@ namespace Fruit
     {
         private int MaxHealth;
         private int CurrentHealth;
-        private int Reward;
+        private int RewardScore;
+        private int RewardMoney;
+        private BlockType Type;
 
         private List<Vector2> points = new List<Vector2>();
 
@@ -62,8 +64,10 @@ namespace Fruit
         {
             if (CurrentHealth <= 0)
             {
-                Variables.Score += Reward;
+                Variables.Score += RewardScore;
                 Variables.Score = Mathf.Clamp(Variables.Score, 0, 99999999);
+
+                MoneySpriteScript.Instance.CreateMoney(RewardMoney, transform.position);
                 
                 BlockSpawner.BlocksCut++;
                 Variables.BlocksCut++;
@@ -113,9 +117,11 @@ namespace Fruit
         public void SetStats(BlockType type)
         {
             BlockInfo info = Variables.BlockInfo[type];
+            Type = type;
             MaxHealth = info.Health;
             CurrentHealth = MaxHealth;
-            Reward = info.Reward;
+            RewardScore = info.RewardScore;
+            RewardMoney = info.MoneyReward;
             GetComponent<SpriteRenderer>().sprite = info.Sprite;
             GetComponentInChildren<AudioSource>().clip = info.Clip;
         }

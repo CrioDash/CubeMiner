@@ -106,6 +106,7 @@ public class BlockSpawner : MonoBehaviour
                 pos.z = -1;
                 GameObject gm = Instantiate(dynamitePrefab, pos, Quaternion.identity);
                 gm.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(35, 70)*mult, -currentFallSpeed));
+                gm.GetComponent<Rigidbody2D>().AddTorque(0.5f, ForceMode2D.Impulse);
                 
                 EventBus.Publish(EventBus.EventType.SPAWN_DYNAMITE);
             }
@@ -113,10 +114,11 @@ public class BlockSpawner : MonoBehaviour
             if (Random.Range(1, 100/chestSpawnChance + 1) == 1)
             {
                 Vector3 pos = spawnPos;
-                pos.x *= -1;
+                pos.x = 0;
                 pos.z = -1;
                 GameObject gm = Instantiate(chestPrefab, pos, Quaternion.identity);
-                gm.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(35, 70)*mult, -currentFallSpeed));
+                gm.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(15, 40)*mult, -currentFallSpeed));
+                gm.GetComponent<Rigidbody2D>().AddTorque(0.5f, ForceMode2D.Impulse);
             }
 
             Variables.BlocksFall++;
@@ -125,7 +127,7 @@ public class BlockSpawner : MonoBehaviour
             block.SetStats(currentType);
             
             block.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(35, 70)*mult*-1, -currentFallSpeed));
-            block.GetComponent<Rigidbody2D>().AddTorque(1, ForceMode2D.Impulse);
+            block.GetComponent<Rigidbody2D>().AddTorque(0.5f, ForceMode2D.Impulse);
             
             yield return wait;
         }

@@ -42,6 +42,7 @@ namespace Fruit
             
             _sprite.sprite = spriteChestOpened;
             _system.Play();
+            transform.eulerAngles = Vector3.zero;
             _body.bodyType = RigidbodyType2D.Static;
             _body.totalForce = Vector2.zero;
 
@@ -75,8 +76,8 @@ namespace Fruit
 
                 while (t<1)
                 {
-                    transform.eulerAngles = eulerAngle;
                     eulerAngle.z = Mathf.Lerp(endRotation, startRotation, animationCurve.Evaluate(t));
+                    transform.eulerAngles = eulerAngle;
                     t += Time.deltaTime*2;
                     yield return null;
                 }

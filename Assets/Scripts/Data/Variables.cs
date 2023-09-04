@@ -14,6 +14,7 @@ namespace Data
         public static int CurrentHealth = 0;
 
         public static int Score = 0;
+        public static int Money = 0;
 
         public static int BlocksCut = 0;
         public static int BlocksFall = 0;
@@ -51,6 +52,7 @@ namespace Data
         
         public static void ResetStats()
         {
+            Money = 0;
             BestCombo = 0;
             CurrentHealth = 0;
             Score = 0;

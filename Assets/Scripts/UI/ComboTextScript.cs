@@ -4,12 +4,15 @@ using Data;
 using PlayerScripts;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace UI
 {
     public class ComboTextScript:MonoBehaviour
     {
+        [SerializeField] private AnimationCurve animationCurve;
+        
         [SerializeField] private GameObject textPrefab;
         [SerializeField] private Transform spawnPos;
         [SerializeField] private float timeToWait;
@@ -45,7 +48,7 @@ namespace UI
                 
                 TextMeshProUGUI text = Instantiate(textPrefab, spawnPos).GetComponent<TextMeshProUGUI>();
                 text.transform.position = spawnPos.position;
-                text.text = comboCount + "X:Combo";
+                text.text = "Combo X" + comboCount + "!";
 
                 switch (comboCount)
                 {
@@ -62,13 +65,66 @@ namespace UI
 
                 Variables.Score += comboCount * 100;
 
-                StartCoroutine(TextFade(text));
+                StartCoroutine(TextGrowRoutine(text.transform));
+                StartCoroutine(TextRotateRoutine(text.transform));
+                StartCoroutine(TextFadeRoutine(text));
+               
                 
                 yield return null;
             }
         }
 
-        private IEnumerator TextFade(TextMeshProUGUI txt)
+        private IEnumerator TextGrowRoutine(Transform obj)
+        {
+            float t = 0;
+
+            while (t < 1)
+            {
+                obj.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, t);
+                t += Time.deltaTime * 4;
+                yield return null;
+            }
+            obj.transform.localScale = Vector3.one;
+        }
+
+        private IEnumerator TextRotateRoutine(Transform obj)
+        {
+            float t = 0;
+
+            Vector3 eulerAngle = obj.transform.eulerAngles;
+            
+            float startRotation = obj.transform.eulerAngles.z - 15;
+            float endRotation = obj.transform.eulerAngles.z + 15;
+
+            while (true)
+            {
+                t = 0;
+
+                while (t<1)
+                {
+                    if (obj == null)
+                        yield break;
+                    eulerAngle.z = Mathf.Lerp(startRotation, endRotation, animationCurve.Evaluate(t));
+                    obj.transform.eulerAngles = eulerAngle;
+                    t += Time.deltaTime*2;
+                    yield return null;
+                }
+
+                t = 0;
+
+                while (t<1)
+                {
+                    if (obj == null)
+                        yield break;
+                    eulerAngle.z = Mathf.Lerp(endRotation, startRotation, animationCurve.Evaluate(t));
+                    obj.transform.eulerAngles = eulerAngle;
+                    t += Time.deltaTime*2;
+                    yield return null;
+                }
+            }
+        }
+
+        private IEnumerator TextFadeRoutine(TextMeshProUGUI txt)
         {
             float t = 0;
             Color startClr = txt.color;
@@ -77,7 +133,7 @@ namespace UI
             while (t<1)
             {
                 txt.color = Color.Lerp(startClr, endClr, t);
-                t += Time.fixedDeltaTime;
+                t += Time.fixedDeltaTime/2;
                 yield return null;
             }
             Destroy(txt.gameObject);

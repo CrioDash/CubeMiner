@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d940a90d5bc45f39e44e06e658b8386, type: 3}
   m_Name: Dirt
   m_EditorClassIdentifier: 
-  _reward: 100
+  _rewardScore: 100
+  _rewardMoney: 1
   _health: 1
   _sprite: {fileID: 21300000, guid: 382e1960cded4e7429fda394b8a6f909, type: 3}
   _clip: {fileID: 8300000, guid: 054c7ea1ec25b774e9954adcb0f29ccf, type: 3}
