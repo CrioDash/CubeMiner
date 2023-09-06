@@ -132,7 +132,7 @@ namespace UI
 
             #endregion
 
-            yield return new WaitForSecondsRealtime(0.25f);
+            yield return new WaitForSecondsRealtime(0.15f);
 
             #region CountScore
 
@@ -147,7 +147,7 @@ namespace UI
                 for (int i = 0; i < 8 - score.ToString().Length; i++)
                     add += "0";
                 textScore.text = add + score;
-                t += Time.unscaledDeltaTime;
+                t += Time.unscaledDeltaTime*2;
                 yield return null;
             }
             
@@ -159,7 +159,7 @@ namespace UI
 
                 #endregion
                 
-            yield return new WaitForSecondsRealtime(0.25f);
+            yield return new WaitForSecondsRealtime(0.15f);
 
             #region RecordCheck
 
@@ -227,7 +227,7 @@ namespace UI
                 for (int i = 0; i < 8 - moneyShow.ToString().Length; i++)
                     add += "0";
                 textMoney.text = add + moneyShow;
-                t += Time.unscaledDeltaTime;
+                t += Time.unscaledDeltaTime*2;
                 yield return null;
             }
 
@@ -252,7 +252,7 @@ namespace UI
 
                 #endregion
 
-            yield return new WaitForSecondsRealtime(0.25f);
+            yield return new WaitForSecondsRealtime(0.15f);
 
             #region BlocksScore
 
@@ -261,7 +261,7 @@ namespace UI
             while (t < 1)
             {
                 textBlocks.text = Mathf.RoundToInt(Mathf.Lerp(0, Variables.BlocksCut, t)) + "/" + Variables.BlocksFall; 
-                t += Time.unscaledDeltaTime;
+                t += Time.unscaledDeltaTime*2;
                 yield return null;
             }
 
@@ -269,7 +269,7 @@ namespace UI
             
                 #endregion
             
-            yield return new WaitForSecondsRealtime(0.25f);
+            yield return new WaitForSecondsRealtime(0.15f);
 
             #region CountMarkScore
 
@@ -298,7 +298,7 @@ namespace UI
 
                 #endregion
 
-            yield return new WaitForSecondsRealtime(0.25f);
+            yield return new WaitForSecondsRealtime(0.15f);
 
             #region BonusMoney
 
@@ -319,7 +319,7 @@ namespace UI
             while (t < 1)
             {
                 textBonusMoney.transform.position = Vector3.Slerp(startPos,endPos, animCurve.Evaluate(t));
-                t += Time.unscaledDeltaTime*1.5f;
+                t += Time.unscaledDeltaTime*2f;
                 yield return null;
             }
 
@@ -341,7 +341,7 @@ namespace UI
                 for (int i = 0; i < 8 - moneyShow.ToString().Length; i++)
                     add += "0";
                 textMoney.text = add + moneyShow;
-                t += Time.unscaledDeltaTime;
+                t += Time.unscaledDeltaTime*2;
                 yield return null;
             }
 

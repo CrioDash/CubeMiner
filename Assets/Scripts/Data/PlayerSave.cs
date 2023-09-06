@@ -38,10 +38,16 @@ namespace Data
             set;
         }
 
+        public int TimeSlowLevel { set; get; }
+        
+        public int ScoreMultiplierLevel { set; get; }
+
         public bool TutorialCompleted { set; get; }
 
         public PlayerSave()
         {
+            TimeSlowLevel = 1;
+            ScoreMultiplierLevel = 1;
             Tools = new List<ToolType>();
             TutorialCompleted = false;
             RecordScore = 0;

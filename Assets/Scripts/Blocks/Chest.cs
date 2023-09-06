@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections;
+using PowerUps;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
+using Variables = Data.Variables;
 
 namespace Fruit
 {
     public class Chest: MonoBehaviour
     {
         [SerializeField] private Sprite spriteChestOpened;
+        [SerializeField] private Transform powerSpawnPos;
         [SerializeField] private AnimationCurve animationCurve;
 
         private SpriteRenderer _sprite;
@@ -46,10 +50,13 @@ namespace Fruit
             _body.bodyType = RigidbodyType2D.Static;
             _body.totalForce = Vector2.zero;
 
+            PowerUpManager.Instance.CreatePowerUp(transform.position, powerSpawnPos.position);
+
             StartCoroutine(ChestRotateRoutine());
             StartCoroutine(ChestFadeRoutine());
 
         }
+
 
         private IEnumerator ChestRotateRoutine()
         {
@@ -86,7 +93,7 @@ namespace Fruit
 
         private IEnumerator ChestFadeRoutine()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             
             Color startClr = _sprite.color;
             Color endClr = startClr;

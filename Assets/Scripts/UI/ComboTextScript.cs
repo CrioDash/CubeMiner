@@ -81,7 +81,7 @@ namespace UI
             while (t < 1)
             {
                 obj.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, t);
-                t += Time.deltaTime * 4;
+                t += Time.unscaledDeltaTime * 4;
                 yield return null;
             }
             obj.transform.localScale = Vector3.one;
@@ -106,7 +106,7 @@ namespace UI
                         yield break;
                     eulerAngle.z = Mathf.Lerp(startRotation, endRotation, animationCurve.Evaluate(t));
                     obj.transform.eulerAngles = eulerAngle;
-                    t += Time.deltaTime*2;
+                    t += Time.unscaledDeltaTime*2;
                     yield return null;
                 }
 
@@ -118,7 +118,7 @@ namespace UI
                         yield break;
                     eulerAngle.z = Mathf.Lerp(endRotation, startRotation, animationCurve.Evaluate(t));
                     obj.transform.eulerAngles = eulerAngle;
-                    t += Time.deltaTime*2;
+                    t += Time.unscaledDeltaTime*2;
                     yield return null;
                 }
             }
@@ -133,7 +133,7 @@ namespace UI
             while (t<1)
             {
                 txt.color = Color.Lerp(startClr, endClr, t);
-                t += Time.fixedDeltaTime/2;
+                t += Time.unscaledDeltaTime/2;
                 yield return null;
             }
             Destroy(txt.gameObject);

@@ -13,6 +13,8 @@ namespace Data
      
         public static int CurrentHealth = 0;
 
+        public static int ScoreMultiplier = 1;
+
         public static int Score = 0;
         public static int Money = 0;
 
@@ -49,9 +51,16 @@ namespace Data
             IronPickaxe,
             DiamondPickaxe,
         }
+
+        public enum PowerType
+        {
+            TimeSlow = 0,
+            ScoreMultiplier = 1 
+        }
         
         public static void ResetStats()
         {
+            ScoreMultiplier = 1;
             Money = 0;
             BestCombo = 0;
             CurrentHealth = 0;

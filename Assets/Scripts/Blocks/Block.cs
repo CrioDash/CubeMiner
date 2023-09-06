@@ -64,10 +64,10 @@ namespace Fruit
         {
             if (CurrentHealth <= 0)
             {
-                Variables.Score += RewardScore;
+                Variables.Score += RewardScore*Variables.ScoreMultiplier;
                 Variables.Score = Mathf.Clamp(Variables.Score, 0, 99999999);
 
-                MoneySpriteScript.Instance.CreateMoney(RewardMoney, transform.position);
+                MoneySpriteScript.Instance.CreateMoney(RewardMoney*Variables.ScoreMultiplier, transform.position);
                 
                 BlockSpawner.BlocksCut++;
                 Variables.BlocksCut++;
