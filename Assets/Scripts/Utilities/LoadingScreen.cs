@@ -28,7 +28,7 @@ namespace Utilities
             StartCoroutine(FadeRoutine());
         }
 
-        private IEnumerator FadeRoutine()
+        public IEnumerator FadeRoutine()
         {
             if(!PauseScript.IsPaused)
                 PauseScript.SetPause();
@@ -36,7 +36,7 @@ namespace Utilities
             while (t < 1)
             {
                 _screenSprite.color = Color.Lerp(Color.clear, Color.black, t);
-                t += Time.unscaledDeltaTime*4;
+                t += Time.unscaledDeltaTime;
                 yield return null;
             }
             _screenSprite.color = Color.black;
@@ -44,12 +44,12 @@ namespace Utilities
         }
         
         private IEnumerator ShowRoutine()
-        {
+        { 
             float t = 0;
             while (t < 1)
             {
                 _screenSprite.color = Color.Lerp(Color.black, Color.clear, t);
-                t += Time.unscaledDeltaTime*4;
+                t += Time.unscaledDeltaTime;
                 yield return null;
             }
             _screenSprite.color = Color.clear;

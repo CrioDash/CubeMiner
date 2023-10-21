@@ -25,7 +25,7 @@ namespace UI
         [SerializeField] private ParticleSystem particleBonus;
         [SerializeField] private Sprite[] MarkList;
 
-        private Image _imageBtnOK;
+        
         private Button _btnOk; 
         private CanvasGroup _group;
 
@@ -33,7 +33,7 @@ namespace UI
         {
             _group = GetComponent<CanvasGroup>();
             _btnOk = GetComponentInChildren<Button>();
-            _imageBtnOK = _btnOk.GetComponent<Image>();
+            
         }
 
         private void Start()
@@ -58,12 +58,7 @@ namespace UI
         {
             StartCoroutine(ShowEndGameRoutine());
         }
-
-        private void Update()
-        {
-            _imageBtnOK.material.SetFloat("_unscaledTime", Time.unscaledTime);
-        }
-
+        
         private IEnumerator ShowEndGameRoutine()
         {
             if(!PauseScript.IsPaused)

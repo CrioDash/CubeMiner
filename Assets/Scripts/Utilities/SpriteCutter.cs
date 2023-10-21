@@ -303,7 +303,7 @@ public class SpriteCutter : MonoBehaviour
         while (t < 1)
         {
             rend.material.color = Color.Lerp(Color.white, clear, t);
-            t += Time.fixedDeltaTime*1.5f;
+            t += Time.deltaTime;
             yield return new WaitForSeconds(Time.deltaTime);
         }
         Destroy(rend.gameObject);

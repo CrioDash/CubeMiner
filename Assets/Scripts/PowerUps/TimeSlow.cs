@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using Utilities;
 
 namespace PowerUps
 {
@@ -32,6 +33,10 @@ namespace PowerUps
             
             while (t < Duration)
             {
+                while (PauseScript.IsPaused)
+                {
+                    yield return null;
+                }
                 Time.timeScale = Mathf.Lerp(endScale, startScale, _animationCurve.Evaluate(t/Duration));
                 t += Time.unscaledDeltaTime;
                 yield return null;

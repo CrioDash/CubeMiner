@@ -46,9 +46,18 @@ public partial class @PlayerInputAsset: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""MiscScene"",
+                    ""name"": ""ShopScene"",
                     ""type"": ""Button"",
                     ""id"": ""887011e9-e908-40aa-82ea-aef8623c370d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SettingsScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""321f46b7-5929-47cd-a67f-11bb148cfe11"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -85,7 +94,18 @@ public partial class @PlayerInputAsset: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MiscScene"",
+                    ""action"": ""ShopScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0206c5b8-04e5-40d7-b6c3-dcd3fe484042"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SettingsScene"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -98,7 +118,8 @@ public partial class @PlayerInputAsset: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_MenuScene = m_Player.FindAction("MenuScene", throwIfNotFound: true);
         m_Player_PlayScene = m_Player.FindAction("PlayScene", throwIfNotFound: true);
-        m_Player_MiscScene = m_Player.FindAction("MiscScene", throwIfNotFound: true);
+        m_Player_ShopScene = m_Player.FindAction("ShopScene", throwIfNotFound: true);
+        m_Player_SettingsScene = m_Player.FindAction("SettingsScene", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -162,14 +183,16 @@ public partial class @PlayerInputAsset: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_MenuScene;
     private readonly InputAction m_Player_PlayScene;
-    private readonly InputAction m_Player_MiscScene;
+    private readonly InputAction m_Player_ShopScene;
+    private readonly InputAction m_Player_SettingsScene;
     public struct PlayerActions
     {
         private @PlayerInputAsset m_Wrapper;
         public PlayerActions(@PlayerInputAsset wrapper) { m_Wrapper = wrapper; }
         public InputAction @MenuScene => m_Wrapper.m_Player_MenuScene;
         public InputAction @PlayScene => m_Wrapper.m_Player_PlayScene;
-        public InputAction @MiscScene => m_Wrapper.m_Player_MiscScene;
+        public InputAction @ShopScene => m_Wrapper.m_Player_ShopScene;
+        public InputAction @SettingsScene => m_Wrapper.m_Player_SettingsScene;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -185,9 +208,12 @@ public partial class @PlayerInputAsset: IInputActionCollection2, IDisposable
             @PlayScene.started += instance.OnPlayScene;
             @PlayScene.performed += instance.OnPlayScene;
             @PlayScene.canceled += instance.OnPlayScene;
-            @MiscScene.started += instance.OnMiscScene;
-            @MiscScene.performed += instance.OnMiscScene;
-            @MiscScene.canceled += instance.OnMiscScene;
+            @ShopScene.started += instance.OnShopScene;
+            @ShopScene.performed += instance.OnShopScene;
+            @ShopScene.canceled += instance.OnShopScene;
+            @SettingsScene.started += instance.OnSettingsScene;
+            @SettingsScene.performed += instance.OnSettingsScene;
+            @SettingsScene.canceled += instance.OnSettingsScene;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -198,9 +224,12 @@ public partial class @PlayerInputAsset: IInputActionCollection2, IDisposable
             @PlayScene.started -= instance.OnPlayScene;
             @PlayScene.performed -= instance.OnPlayScene;
             @PlayScene.canceled -= instance.OnPlayScene;
-            @MiscScene.started -= instance.OnMiscScene;
-            @MiscScene.performed -= instance.OnMiscScene;
-            @MiscScene.canceled -= instance.OnMiscScene;
+            @ShopScene.started -= instance.OnShopScene;
+            @ShopScene.performed -= instance.OnShopScene;
+            @ShopScene.canceled -= instance.OnShopScene;
+            @SettingsScene.started -= instance.OnSettingsScene;
+            @SettingsScene.performed -= instance.OnSettingsScene;
+            @SettingsScene.canceled -= instance.OnSettingsScene;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -222,6 +251,7 @@ public partial class @PlayerInputAsset: IInputActionCollection2, IDisposable
     {
         void OnMenuScene(InputAction.CallbackContext context);
         void OnPlayScene(InputAction.CallbackContext context);
-        void OnMiscScene(InputAction.CallbackContext context);
+        void OnShopScene(InputAction.CallbackContext context);
+        void OnSettingsScene(InputAction.CallbackContext context);
     }
 }

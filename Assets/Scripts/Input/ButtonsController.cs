@@ -23,7 +23,8 @@ namespace Input
             PlayerInputAsset.Enable();
             PlayerInputAsset.Player.MenuScene.performed += MenuSceneBackButton;
             PlayerInputAsset.Player.PlayScene.performed += PlaySceneBackButton;
-            PlayerInputAsset.Player.MiscScene.performed += OtherScenesBackButton;
+            PlayerInputAsset.Player.ShopScene.performed += ShopSceneBackButton;
+            PlayerInputAsset.Player.SettingsScene.performed += SettingsSceneBackButton;
 
             LastAction = PlayerInputAsset.FindAction(SceneManager.GetActiveScene().name);
 
@@ -58,7 +59,12 @@ namespace Input
             MenuSceneExitWindow.Instance.ChangeWindowState();
         }
 
-        private void OtherScenesBackButton(InputAction.CallbackContext context)
+        private void ShopSceneBackButton(InputAction.CallbackContext context)
+        {
+            SceneSwitcher.Instance.LoadScene("MenuScene");
+        }
+        
+        private void SettingsSceneBackButton(InputAction.CallbackContext context)
         {
             SceneSwitcher.Instance.LoadScene("MenuScene");
         }

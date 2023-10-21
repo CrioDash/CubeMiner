@@ -5131,7 +5131,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteChestOpened: {fileID: 202900947, guid: 0dee88b44d16c514ebb9b01c4f16e5cb, type: 3}
   powerSpawnPos: {fileID: 2021117370896131383}
-  powerPrefab: {fileID: 8013710333097632941, guid: d3acbf8b002e35e449d68d7bd71a10a0, type: 3}
   animationCurve:
     serializedVersion: 2
     m_Curve:

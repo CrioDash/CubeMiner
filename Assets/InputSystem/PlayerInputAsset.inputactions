@@ -24,9 +24,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MiscScene",
+                    "name": "ShopScene",
                     "type": "Button",
                     "id": "887011e9-e908-40aa-82ea-aef8623c370d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SettingsScene",
+                    "type": "Button",
+                    "id": "321f46b7-5929-47cd-a67f-11bb148cfe11",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -63,7 +72,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MiscScene",
+                    "action": "ShopScene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0206c5b8-04e5-40d7-b6c3-dcd3fe484042",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SettingsScene",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

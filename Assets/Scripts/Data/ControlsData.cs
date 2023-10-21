@@ -4,6 +4,6 @@ namespace Data
 {
     public class ControlsData
     {
-        public static string[] ActionsList = {"MenuScene", "PlayScene", "MiscScene"};
+        public static string[] ActionsList = {"MenuScene", "PlayScene", "ShopScene", "SettingsScene"};
     }
 }
