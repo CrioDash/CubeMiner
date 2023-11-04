@@ -93,7 +93,7 @@ namespace UI
             textBlocks.text = "0/" + Variables.BlocksFall;
 
                 add = "";
-            for (int i = 0; i < 8 - PlayerSave.Instance.Money.ToString().Length; i++)
+            for (int i = 0; i < 6 - PlayerSave.Instance.Money.ToString().Length; i++)
                 add += "0";
             
             textMoney.text = add + PlayerSave.Instance.Money;
@@ -101,6 +101,7 @@ namespace UI
             int markBonus = Mathf.RoundToInt((float)markScore* Variables.Money / 20);
 
             PlayerSave.Instance.Money += Variables.Money + markBonus;
+            PlayerSave.Instance.Money = Mathf.Clamp(PlayerSave.Instance.Money, 0, 999999);
             
             
             int startMoney = PlayerSave.Instance.Money- Variables.Money - markBonus;
@@ -219,7 +220,7 @@ namespace UI
                     break;
                 moneyShow = Mathf.RoundToInt(Mathf.Lerp(startMoney, endMoney, t));
                 add = "";
-                for (int i = 0; i < 8 - moneyShow.ToString().Length; i++)
+                for (int i = 0; i < 6 - moneyShow.ToString().Length; i++)
                     add += "0";
                 textMoney.text = add + moneyShow;
                 t += Time.unscaledDeltaTime*2;
@@ -229,7 +230,7 @@ namespace UI
             moneyShow = endMoney;
             
             add = "";
-            for (int i = 0; i < 8 - moneyShow.ToString().Length; i++)
+            for (int i = 0; i < 6 - moneyShow.ToString().Length; i++)
                 add += "0";
 
             textMoney.text = add + moneyShow;
@@ -333,7 +334,7 @@ namespace UI
             {
                 moneyShow = Mathf.RoundToInt(Mathf.Lerp(startMoney, endMoney, t));
                 add = "";
-                for (int i = 0; i < 8 - moneyShow.ToString().Length; i++)
+                for (int i = 0; i < 6 - moneyShow.ToString().Length; i++)
                     add += "0";
                 textMoney.text = add + moneyShow;
                 t += Time.unscaledDeltaTime*2;
@@ -342,7 +343,7 @@ namespace UI
 
             moneyShow = endMoney;
             add = "";
-            for (int i = 0; i < 8 - moneyShow.ToString().Length; i++)
+            for (int i = 0; i < 6 - moneyShow.ToString().Length; i++)
                 add += "0";
             textMoney.text = add + moneyShow;
 

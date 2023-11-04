@@ -2,6 +2,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Utilities
 {
@@ -9,37 +10,42 @@ namespace Utilities
     {
         private bool IsFade = true;
 
-        private SpriteRenderer _screenSprite;
+        private CanvasGroup _group;
+        private Image _screenSprite;
 
         private void Awake()
         {
-            _screenSprite = GetComponentInChildren<SpriteRenderer>();
+            _screenSprite = GetComponentInChildren<Image>();
+            _group = GetComponent<CanvasGroup>();
         }
 
         public void Show()
         {
-            _screenSprite.color = Color.black;
+            _group.alpha = 1;
             StartCoroutine(ShowRoutine());
         }
 
         public void Fade()
         {
-            _screenSprite.color = Color.clear;
+            _group.alpha = 0;
+            _group.blocksRaycasts = true;
             StartCoroutine(FadeRoutine());
         }
 
         public IEnumerator FadeRoutine()
         {
+            _group.blocksRaycasts = true;
             if(!PauseScript.IsPaused)
                 PauseScript.SetPause();
             float t = 0;
             while (t < 1)
             {
-                _screenSprite.color = Color.Lerp(Color.clear, Color.black, t);
-                t += Time.unscaledDeltaTime;
+                _group.alpha = Mathf.Lerp(0, 1, t);
+                t += Time.unscaledDeltaTime*2;
                 yield return null;
             }
-            _screenSprite.color = Color.black;
+
+            _group.alpha = 1;
             IsFade = true;
         }
         
@@ -48,11 +54,12 @@ namespace Utilities
             float t = 0;
             while (t < 1)
             {
-                _screenSprite.color = Color.Lerp(Color.black, Color.clear, t);
-                t += Time.unscaledDeltaTime;
+                _group.alpha = Mathf.Lerp(1, 0, t);
+                t += Time.unscaledDeltaTime*2;
                 yield return null;
             }
-            _screenSprite.color = Color.clear;
+            _group.alpha = 0;
+            _group.blocksRaycasts = false;
             IsFade = false;
             if(PauseScript.IsPaused)
                 PauseScript.SetPause();

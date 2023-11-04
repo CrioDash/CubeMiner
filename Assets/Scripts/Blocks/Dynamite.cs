@@ -55,7 +55,6 @@ namespace Fruit
             if(!PlayerSave.Instance.TutorialCompleted)
                     return;
             
-            Handheld.Vibrate();
 
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
             
@@ -105,7 +104,6 @@ namespace Fruit
             
             foreach (GameObject obj in objects)
             {
-                Handheld.Vibrate();
 
                 obj.GetComponent<MeshRenderer>().enabled = false;
                 

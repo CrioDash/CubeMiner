@@ -30,8 +30,8 @@ namespace PlayerScripts
         private void Start()
         {
 
-            _instrument.sprite = Variables.ToolInfo[PlayerSave.Instance.CurrentTool].Sprite;
-            _trail.colorGradient = Variables.ToolInfo[PlayerSave.Instance.CurrentTool].ColorGradient;
+            _instrument.sprite = Variables.ToolInfo[PlayerSave.Instance.CurrentTool][PlayerSave.Instance.ToolLevel[PlayerSave.Instance.CurrentTool]].Sprite;
+            _trail.colorGradient = Variables.ToolInfo[PlayerSave.Instance.CurrentTool][PlayerSave.Instance.ToolLevel[PlayerSave.Instance.CurrentTool]].ColorGradient;
             
             if (Application.platform != RuntimePlatform.Android)
                 checkOS = WindowsCheck;

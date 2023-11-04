@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Data
@@ -7,11 +8,21 @@ namespace Data
     {
         private void Start()
         {
-            Variables.ToolInfo = new Dictionary<Variables.ToolType, ToolInfo>();
-            ToolInfo[] info = Resources.LoadAll<ToolInfo>("Tools/");
-            for(int i=0;i<info.Length;i++)
+            Variables.ToolInfo = new Dictionary<Variables.ToolType, List<ToolInfo>>();
+            
+            List<List<ToolInfo>> toolInfo = new List<List<ToolInfo>>();
+            
+            toolInfo.Add(Resources.LoadAll<ToolInfo>("Tools/Shovels/").ToList().OrderBy(o => o.Damage).ToList());
+
+            Variables.ToolInfo.Add(Variables.ToolType.Shovel, new List<ToolInfo>());
+            
+            
+            for(int i = 0; i < toolInfo.Count; i++)
             {
-                Variables.ToolInfo.Add(info[i].Type, info[i]);
+                for (int j = 0; j < 4; j++)
+                {
+                    Variables.ToolInfo[(Variables.ToolType)i].Add(toolInfo[i][j]);
+                }
             }
         }
     }

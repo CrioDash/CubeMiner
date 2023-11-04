@@ -20,11 +20,7 @@ namespace Data
             set;
         }
 
-        public List<ToolType> Tools
-        {
-            get;
-            set;
-        }
+        public Dictionary<ToolType, int> ToolLevel = new Dictionary<ToolType, int>();
 
         public ToolType CurrentTool
         {
@@ -38,22 +34,20 @@ namespace Data
             set;
         }
 
-        public int TimeSlowLevel { set; get; }
-        
-        public int ScoreMultiplierLevel { set; get; }
+        public Dictionary<PowerType, int> powerupLevels = new Dictionary<PowerType, int>();
 
         public bool TutorialCompleted { set; get; }
 
         public PlayerSave()
         {
-            TimeSlowLevel = 1;
-            ScoreMultiplierLevel = 1;
-            Tools = new List<ToolType>();
+            powerupLevels.Add(PowerType.TimeSlow, 0);
+            powerupLevels.Add(PowerType.ScoreMultiplier, 0);
+            powerupLevels.Add(PowerType.Magnet, 0);
             TutorialCompleted = false;
             RecordScore = 0;
-            Money = 0;
-            CurrentTool = ToolType.WoodShovel;
-            Tools.Add(CurrentTool);
+            Money = 50000;
+            CurrentTool = ToolType.Shovel;
+            ToolLevel.Add(CurrentTool, 0);
         }
         
     }

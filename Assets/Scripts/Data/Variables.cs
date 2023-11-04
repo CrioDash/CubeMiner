@@ -26,7 +26,11 @@ namespace Data
         //BlockStats
 
         public static Dictionary<BlockType, BlockInfo> BlockInfo = new Dictionary<BlockType, BlockInfo>();
-        public static Dictionary<ToolType, ToolInfo> ToolInfo = new Dictionary<ToolType, ToolInfo>();
+        
+        //ToolStats
+
+        public static Dictionary<ToolType, List<ToolInfo>> ToolInfo = new Dictionary<ToolType, List<ToolInfo>>();
+        
 
         public enum BlockType
         {
@@ -38,24 +42,16 @@ namespace Data
         
         public enum ToolType
         {
-            WoodShovel,
-            StoneShovel,
-            IronShovel,
-            DiamondShovel,
-            WoodAxe,
-            StoneAxe,
-            IronAxe,
-            DiamondAxe,
-            WoodPickaxe,
-            StonePickaxe,
-            IronPickaxe,
-            DiamondPickaxe,
+            Shovel,
+            Axe,
+            Pickaxe
         }
 
         public enum PowerType
         {
             TimeSlow = 0,
-            ScoreMultiplier = 1 
+            ScoreMultiplier = 1, 
+            Magnet = 2
         }
         
         public static void ResetStats()
@@ -70,9 +66,9 @@ namespace Data
             BlockSpawner.BlocksCut = 0;
         }
 
-        public static void UpdateVariables(PlayerSave save)
+        public static void UpdateVariables()
         {
-            Damage = ToolInfo[PlayerSave.Instance.CurrentTool].Damage;
+            Damage = ToolInfo[PlayerSave.Instance.CurrentTool][PlayerSave.Instance.ToolLevel[PlayerSave.Instance.CurrentTool]].Damage;
         }
     }
 }

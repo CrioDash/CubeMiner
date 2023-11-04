@@ -15,6 +15,11 @@ namespace UI
             _imageBtn = GetComponent<Image>();
         }
 
+        private void Start()
+        {
+            
+        }
+
         private void Update()
         {
             if(_button.interactable)

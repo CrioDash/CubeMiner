@@ -10,6 +10,11 @@ namespace PowerUps
             Variables.ScoreMultiplier = 2;
         }
 
+        private void Awake()
+        {
+            Duration += PlayerSave.Instance.powerupLevels[Type] * 2;
+        }
+        
         public override void RemovePowerUp()
         {
             Variables.ScoreMultiplier = 1;

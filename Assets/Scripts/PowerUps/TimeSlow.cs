@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Data;
 using UnityEngine;
 using Utilities;
 
@@ -10,6 +11,11 @@ namespace PowerUps
         [SerializeField] private AnimationCurve _animationCurve;
         
         private Coroutine _currentCoroutine; 
+        
+        private void Awake()
+        {
+            Duration += PlayerSave.Instance.powerupLevels[Type] * 1;
+        }
         
         public override void UsePowerUp()
         {

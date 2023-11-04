@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c850051eaa22410fafdad3d9529ced66, type: 3}
-  m_Name: WoodenShovel
+  m_Name: IronShovel
   m_EditorClassIdentifier: 
   _type: 0
-  _damage: 1
+  _cost: 2000
+  _damage: 3
   _colorGradient:
     serializedVersion: 2
-    key0: {r: 0.6392157, g: 0.28627452, b: 0.22352943, a: 1}
-    key1: {r: 0.6392157, g: 0.28627452, b: 0.22352943, a: 0}
+    key0: {r: 0.59607846, g: 0.63529414, b: 0.5019608, a: 1}
+    key1: {r: 0.5921569, g: 0.6313726, b: 0.49803925, a: 0}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -44,5 +45,5 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  _color: {r: 0.6392157, g: 0.28627452, b: 0.22352943, a: 1}
-  _sprite: {fileID: 21300000, guid: 3263f45bc2b30fe4e8b109ce381b8203, type: 3}
+  _color: {r: 0.59607846, g: 0.63529414, b: 0.5019608, a: 1}
+  _sprite: {fileID: 21300000, guid: 1f8622ffb3ef38b4ebab619edbb11221, type: 3}

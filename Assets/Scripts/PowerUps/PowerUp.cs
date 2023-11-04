@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using System;
+using Data;
 using UnityEngine;
 
 namespace PowerUps
@@ -8,11 +9,15 @@ namespace PowerUps
         [SerializeField] private int _duration;
         [SerializeField] private Variables.PowerType _type;
 
-        public int Duration => _duration;
+        public int Duration
+        {
+            set => _duration = value;
+            get => _duration;
+        }
         public Variables.PowerType Type => _type;
 
         public static int PowerUpCount = 2;
-        
+
         public abstract void UsePowerUp();
 
         public abstract void RemovePowerUp();

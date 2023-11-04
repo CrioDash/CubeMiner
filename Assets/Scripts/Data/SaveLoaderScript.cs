@@ -58,7 +58,7 @@ namespace Data
         private void Start()
         {
             Load();
-            Variables.UpdateVariables(PlayerSave.Instance);
+            Variables.UpdateVariables();
         }
     }
 }

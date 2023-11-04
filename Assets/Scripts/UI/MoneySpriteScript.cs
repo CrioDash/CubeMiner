@@ -47,7 +47,7 @@ namespace UI
             _system.Play();
 
             Variables.Money += reward;
-
+            Variables.Money = Mathf.Clamp(Variables.Money, 0, 999999);
         }
     }
 }
