@@ -22,10 +22,12 @@ namespace Fruit
         private List<Vector2> points = new List<Vector2>();
 
         private Rigidbody2D _body;
+        private GameObject _childCollider;
 
         private void Awake()
         {
             _body = GetComponent<Rigidbody2D>();
+            _childCollider = transform.GetChild(0).gameObject;
         }
 
         private void OnTriggerExit2D(Collider2D other)
@@ -106,10 +108,11 @@ namespace Fruit
         
         public void ExplosiveDamage(int expPower, float angle)
         {
-            
+            _childCollider.SetActive(false);
             CurrentHealth -= 1000;
             _body.AddForce(new Vector2(expPower*Mathf.Cos(angle), expPower*Mathf.Sin(angle)));
             _body.AddTorque(1, ForceMode2D.Impulse);
+            
             GetComponent<BoxCollider2D>().enabled = false;
             Destroy(gameObject,2f);
         }

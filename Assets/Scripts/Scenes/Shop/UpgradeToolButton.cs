@@ -33,10 +33,6 @@ namespace Scenes.Shop
             _shovel_image.sprite =
                 Variables.ToolInfo[PlayerSave.Instance.CurrentTool][PlayerSave.Instance.ToolLevel[PlayerSave.Instance.CurrentTool]]
                     .Sprite;
-        }
-
-        private void Update()
-        {
             _btn.interactable = PlayerSave.Instance.Money >= _currentCost
                                 && PlayerSave.Instance.ToolLevel[Variables.ToolType.Shovel] < 3;
             _text.text = PlayerSave.Instance.ToolLevel[PlayerSave.Instance.CurrentTool]<3 ? _currentCost.ToString() : "MAX";
@@ -73,6 +69,9 @@ namespace Scenes.Shop
             if(PlayerSave.Instance.ToolLevel[PlayerSave.Instance.CurrentTool]<3)
                 UpdateCost();
             _text.text = _currentCost.ToString();
+            _btn.interactable = PlayerSave.Instance.Money >= _currentCost
+                                && PlayerSave.Instance.ToolLevel[Variables.ToolType.Shovel] < 3;
+            _text.text = PlayerSave.Instance.ToolLevel[PlayerSave.Instance.CurrentTool]<3 ? _currentCost.ToString() : "MAX";
             Variables.UpdateVariables();
         }
         

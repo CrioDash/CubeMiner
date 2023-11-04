@@ -2,9 +2,12 @@
 using System.Collections;
 using Data;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
+using EventBus = Utilities.EventBus;
+using Variables = Data.Variables;
 
 namespace UI
 {
@@ -28,6 +31,7 @@ namespace UI
         
         private Button _btnOk; 
         private CanvasGroup _group;
+        private static Coroutine _coroutine;
 
         private void Awake()
         {
@@ -56,13 +60,16 @@ namespace UI
 
         private void ShowEngGame()
         {
-            StartCoroutine(ShowEndGameRoutine());
+            if(_coroutine == null)
+                _coroutine = StartCoroutine(ShowEndGameRoutine());
         }
         
         private IEnumerator ShowEndGameRoutine()
         {
             if(!PauseScript.IsPaused)
                 PauseScript.SetPause();
+            
+            
 
             #region Variables
 

@@ -4935,8 +4935,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4819310599477064128}
   - component: {fileID: 3931870749670954679}
-  m_Layer: 0
-  m_Name: GameObject
+  m_Layer: 5
+  m_Name: block_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5000,7 +5000,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 0.15384616, y: 0.15384616}
   m_EdgeRadius: 0
 --- !u!1 &7151650895630763803
 GameObject:
@@ -5032,11 +5032,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.02, y: -0.06, z: 0}
-  m_LocalScale: {x: 6.25, y: 6.25, z: 8}
+  m_LocalScale: {x: 6.5, y: 6.5, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7932440304047916414}
   - {fileID: 4819310599477064128}
+  - {fileID: 7932440304047916414}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3540387863790365074

@@ -22,6 +22,7 @@ namespace Scenes.Shop
             {
                 _group.alpha = _toggle.isOn ? 1 : 0;
                 _group.blocksRaycasts = _toggle.isOn;
+                _group.gameObject.SetActive(_toggle.isOn);
             });
         }
     }

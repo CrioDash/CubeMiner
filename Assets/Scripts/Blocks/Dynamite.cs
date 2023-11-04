@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Security.Cryptography;
 using Data;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,7 +15,17 @@ namespace Fruit
         [SerializeField] private int explosionPower;
         [SerializeField] private int explosionRadius;
 
-        private void OnTriggerExit2D(Collider2D other)
+        private static Dynamite _dynamite;
+
+        private void Awake()
+        {
+            if (_dynamite == null)
+                _dynamite = this;
+            else
+                Destroy(gameObject);
+        }
+
+            private void OnTriggerExit2D(Collider2D other)
         {
             if(other.CompareTag("Player"))
                 Slice();
