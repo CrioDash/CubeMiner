@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IronShovel
   m_EditorClassIdentifier: 
   _type: 0
-  _cost: 2000
+  _cost: 15000
   _damage: 3
   _colorGradient:
     serializedVersion: 2

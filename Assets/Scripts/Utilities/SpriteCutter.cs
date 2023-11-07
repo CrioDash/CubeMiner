@@ -32,6 +32,7 @@ public class SpriteCutter : MonoBehaviour
         rend.enabled = false;
 
         obj.GetComponent<BoxCollider2D>().enabled = false;
+        obj.GetComponent<Rigidbody2D>().isKinematic = true;
         
         Material mat = rend.material;
         mat.mainTexture = rend.sprite.texture;

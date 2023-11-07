@@ -6,10 +6,10 @@ namespace PowerUps
 {
     public abstract class PowerUp:MonoBehaviour
     {
-        [SerializeField] private int _duration;
+        [SerializeField] private float _duration;
         [SerializeField] private Variables.PowerType _type;
 
-        public int Duration
+        public float Duration
         {
             set => _duration = value;
             get => _duration;

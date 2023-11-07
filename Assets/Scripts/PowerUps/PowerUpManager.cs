@@ -65,7 +65,7 @@ namespace PowerUps
                     yield return null;
                 movingIcon.transform.position = Vector3.Lerp(chestPos, startPos, animationCurve.Evaluate(t));
                 movingIcon.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, animationCurve.Evaluate(t));
-                t += Time.unscaledDeltaTime * 4;
+                t += Time.deltaTime * 4;
                 yield return null;
             }
             
@@ -78,7 +78,7 @@ namespace PowerUps
                 while (PauseScript.IsPaused)
                     yield return null;
                 movingIcon.transform.position = Vector3.Lerp(startPos, endPos, animationCurve.Evaluate(t));
-                t += Time.unscaledDeltaTime * 4;
+                t += Time.deltaTime * 4;
                 yield return null;
             }
 
@@ -122,8 +122,8 @@ namespace PowerUps
             {
                 while (PauseScript.IsPaused)
                     yield return null;
-                group.alpha = Mathf.Lerp(1, 0, t / duration);
-                t += Time.unscaledDeltaTime;
+                group.alpha = Mathf.Lerp(1, 0.2f, t / duration);
+                t += Time.deltaTime;
                 yield return null;
             }
 

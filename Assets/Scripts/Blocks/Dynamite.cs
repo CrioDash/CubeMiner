@@ -15,12 +15,13 @@ namespace Fruit
         [SerializeField] private int explosionPower;
         [SerializeField] private int explosionRadius;
 
-        private static Dynamite _dynamite;
+        public static Dynamite dynamite;
+        private bool _isSliced;
 
         private void Awake()
         {
-            if (_dynamite == null)
-                _dynamite = this;
+            if (dynamite == null)
+                dynamite = this;
             else
                 Destroy(gameObject);
         }
@@ -39,18 +40,20 @@ namespace Fruit
 
         public void Slice()
         {
-            if(!PlayerSave.Instance.TutorialCompleted)
+            if(!PlayerSave.Instance.TutorialCompleted || _isSliced)
                 return;
             StartCoroutine(ExplodeRoutine(SpriteCutter.Instance.CutTnt(gameObject)));
         }
 
         private void OnMouseUpAsButton()
         {
+            _isSliced = true;
             Explode();
         }
 
         private void OnMouseDown()
         {
+            _isSliced = true;
             Explode();
         }
 
@@ -90,13 +93,12 @@ namespace Fruit
 
             EventBus.Publish(EventBus.EventType.CHANGE_BLOCK);
             BlockSpawner.BlocksCut = 0;
-            
             Destroy(gameObject);
+           
         }
 
         private IEnumerator ExplodeRoutine(GameObject[] objects)
         {
-
             Variables.CurrentHealth = 0;
             
             AudioSource parentSource = GetComponentInChildren<AudioSource>();
@@ -112,7 +114,7 @@ namespace Fruit
 
             source.clip = parentSource.clip;
             source.volume = 1f;
-            
+
             foreach (GameObject obj in objects)
             {
 
@@ -126,7 +128,7 @@ namespace Fruit
                 yield return wait;
             }
             EventBus.Publish(EventBus.EventType.TAKE_DAMAGE);
-            
+            Destroy(gameObject);
         }
 
         private void OnDrawGizmosSelected()

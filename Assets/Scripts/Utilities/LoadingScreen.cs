@@ -8,14 +8,11 @@ namespace Utilities
 {
     public class LoadingScreen:MonoBehaviour
     {
-        private bool IsFade = true;
 
         private CanvasGroup _group;
-        private Image _screenSprite;
 
         private void Awake()
         {
-            _screenSprite = GetComponentInChildren<Image>();
             _group = GetComponent<CanvasGroup>();
         }
 
@@ -46,7 +43,6 @@ namespace Utilities
             }
 
             _group.alpha = 1;
-            IsFade = true;
         }
         
         private IEnumerator ShowRoutine()
@@ -60,7 +56,6 @@ namespace Utilities
             }
             _group.alpha = 0;
             _group.blocksRaycasts = false;
-            IsFade = false;
             if(PauseScript.IsPaused)
                 PauseScript.SetPause();
             EventBus.Publish(EventBus.EventType.GAME_START);

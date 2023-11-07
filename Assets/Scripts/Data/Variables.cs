@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Fruit;
 using UI;
 
 namespace Data
@@ -35,9 +36,10 @@ namespace Data
         public enum BlockType
         {
             Dirt = 0,
-            Wood = 1,
+            Sand = 1,
             Snow = 2,
-            Gold = 3
+            Gravel = 3,
+            Megadirt = 4
         }
         
         public enum ToolType
@@ -56,6 +58,8 @@ namespace Data
         
         public static void ResetStats()
         {
+            EndGamePanelScript.Coroutine = null;
+            Dynamite.dynamite = null;
             ScoreMultiplier = 1;
             Money = 0;
             BestCombo = 0;

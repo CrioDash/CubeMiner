@@ -65,6 +65,10 @@ namespace UI
                     case 5:
                         text.color = Color.magenta;
                         break;
+                    case 6:
+                        text.color = new Color(105/255f, 1, 160/255f, 1);
+                        break;
+                    
                 }
 
                 Variables.Score += comboCount * 100;
@@ -202,7 +206,7 @@ namespace UI
             while (t < 1)
             {
                 obj.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, t);
-                t += Time.unscaledDeltaTime * 4;
+                t += Time.deltaTime * 4;
                 yield return null;
             }
             obj.transform.localScale = Vector3.one;
@@ -227,7 +231,7 @@ namespace UI
                         yield break;
                     eulerAngle.z = Mathf.Lerp(startRotation, endRotation, animationCurve.Evaluate(t));
                     obj.transform.eulerAngles = eulerAngle;
-                    t += Time.unscaledDeltaTime*2;
+                    t += Time.deltaTime*2;
                     yield return null;
                 }
 
@@ -239,7 +243,7 @@ namespace UI
                         yield break;
                     eulerAngle.z = Mathf.Lerp(endRotation, startRotation, animationCurve.Evaluate(t));
                     obj.transform.eulerAngles = eulerAngle;
-                    t += Time.unscaledDeltaTime*2;
+                    t += Time.deltaTime*2;
                     yield return null;
                 }
             }
@@ -255,7 +259,7 @@ namespace UI
             {
                 group.alpha = Mathf.Lerp(1, 0, t);
 
-                t += Time.unscaledDeltaTime/2;
+                t += Time.deltaTime/2;
                 yield return null;
             }
             Destroy(txt.gameObject);

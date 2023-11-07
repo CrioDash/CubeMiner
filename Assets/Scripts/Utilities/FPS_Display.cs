@@ -16,7 +16,6 @@ public class FPS_Display : MonoBehaviour
 
     private void Start()
     {
-        DontDestroyOnLoad(this);
     }
 
     // Update is called once per frame

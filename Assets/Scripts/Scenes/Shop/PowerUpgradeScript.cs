@@ -23,12 +23,13 @@ namespace Scenes.Shop
             _btn = GetComponent<Button>();
             _text = GetComponentInChildren<TextMeshProUGUI>();
             _system = _levelContainer.transform.parent.GetComponentInChildren<ParticleSystem>();
+            for(int i = 0; i< PlayerSave.Instance.powerupLevels[_type]; i++)
+                Instantiate(_levelPrefab, _levelContainer.transform);
         }
 
         private void Start()
         {
-            for(int i = 0; i< PlayerSave.Instance.powerupLevels[_type]; i++)
-                Instantiate(_levelPrefab, _levelContainer.transform);
+            
             _btn.onClick.AddListener(() => StartCoroutine(UpgradeRoutine()));
             if(PlayerSave.Instance.powerupLevels[_type]<5)
                 UpdateCost();

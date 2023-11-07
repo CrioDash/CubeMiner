@@ -31,7 +31,8 @@ namespace UI
         
         private Button _btnOk; 
         private CanvasGroup _group;
-        private static Coroutine _coroutine;
+        
+        public static Coroutine Coroutine;
 
         private void Awake()
         {
@@ -60,8 +61,8 @@ namespace UI
 
         private void ShowEngGame()
         {
-            if(_coroutine == null)
-                _coroutine = StartCoroutine(ShowEndGameRoutine());
+            if(Coroutine == null)
+                Coroutine = StartCoroutine(ShowEndGameRoutine());
         }
         
         private IEnumerator ShowEndGameRoutine()

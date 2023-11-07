@@ -11,7 +11,7 @@ public class SceneSwitcher : MonoBehaviour
 {
     private IEnumerator _currentCoroutine;
 
-    public static string lastScene;
+    public static string LastScene;
 
     public static SceneSwitcher Instance;
 
@@ -58,7 +58,7 @@ public class SceneSwitcher : MonoBehaviour
         
        
 
-        lastScene = SceneManager.GetActiveScene().name;
+        LastScene = SceneManager.GetActiveScene().name;
 
         if(_currentCoroutine!=null)
             yield return StartCoroutine(_currentCoroutine);

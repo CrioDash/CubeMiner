@@ -38,14 +38,19 @@ namespace Data
 
         public bool TutorialCompleted { set; get; }
 
+        public bool SoundON { set; get; }
+        public bool MusicON { set; get; }
+
         public PlayerSave()
         {
             powerupLevels.Add(PowerType.TimeSlow, 0);
             powerupLevels.Add(PowerType.ScoreMultiplier, 0);
             powerupLevels.Add(PowerType.Magnet, 0);
             TutorialCompleted = false;
+            SoundON = true;
+            MusicON = true;
             RecordScore = 0;
-            Money = 50000;
+            Money = 0;
             CurrentTool = ToolType.Shovel;
             ToolLevel.Add(CurrentTool, 0);
         }

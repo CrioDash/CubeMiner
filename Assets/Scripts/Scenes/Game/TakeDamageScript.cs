@@ -38,6 +38,7 @@ namespace Game
 
         private void TakeDamage()
         {
+            Debug.Log("Damage");
             _source.Play();
 
             if (Variables.CurrentHealth >= Variables.MaxHealth)

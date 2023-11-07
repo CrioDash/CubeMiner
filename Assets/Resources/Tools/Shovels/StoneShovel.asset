@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StoneShovel
   m_EditorClassIdentifier: 
   _type: 0
-  _cost: 500
+  _cost: 5000
   _damage: 2
   _colorGradient:
     serializedVersion: 2

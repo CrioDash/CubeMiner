@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DiamondShovel
   m_EditorClassIdentifier: 
   _type: 0
-  _cost: 5000
+  _cost: 50000
   _damage: 4
   _colorGradient:
     serializedVersion: 2

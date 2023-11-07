@@ -6,6 +6,7 @@ Library: D:\UnityProjects\PixelNinja\Temp\BurstOutput\tempburstlibs\arm64-v8a\li
 --meta-data-generation=False
 --dump=Function
 --float-precision=Standard
+--target-framework=NetFramework
 --assembly-defines=UnityEngine;
 --assembly-defines=Assembly-CSharp;
 --assembly-defines=Unity.2D.IK.Runtime;
@@ -73,7 +74,7 @@ Library: D:\UnityProjects\PixelNinja\Temp\BurstOutput\tempburstlibs\arm64-v8a\li
 --assembly-defines=mscorlib;
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\UnityProjects\PixelNinja\Temp\Burst
---key-folder=D:/Programs/Unity/2022.3.5f1/Editor/Data/PlaybackEngines/AndroidPlayer
+--key-folder=D:/Programs/Unity/2022.3.12f1/Editor/Data/PlaybackEngines/AndroidPlayer
 --decode-folder=D:\UnityProjects\PixelNinja\Library\Burst
 --output=D:\UnityProjects\PixelNinja\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
@@ -121,6 +122,7 @@ Library: D:\UnityProjects\PixelNinja\Temp\BurstOutput\tempburstlibs\arm64-v8a\li
 --meta-data-generation=False
 --dump=Function
 --float-precision=Standard
+--target-framework=NetFramework
 --float-mode=Fast
 --assembly-defines=UnityEngine;
 --assembly-defines=Assembly-CSharp;
@@ -189,7 +191,7 @@ Library: D:\UnityProjects\PixelNinja\Temp\BurstOutput\tempburstlibs\arm64-v8a\li
 --assembly-defines=mscorlib;
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\UnityProjects\PixelNinja\Temp\Burst
---key-folder=D:/Programs/Unity/2022.3.5f1/Editor/Data/PlaybackEngines/AndroidPlayer
+--key-folder=D:/Programs/Unity/2022.3.12f1/Editor/Data/PlaybackEngines/AndroidPlayer
 --decode-folder=D:\UnityProjects\PixelNinja\Library\Burst
 --output=D:\UnityProjects\PixelNinja\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/

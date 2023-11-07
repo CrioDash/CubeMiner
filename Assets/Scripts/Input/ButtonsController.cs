@@ -21,7 +21,6 @@ namespace Input
         {
             PlayerInputAsset = new PlayerInputAsset();
             PlayerInputAsset.Enable();
-            PlayerInputAsset.Player.MenuScene.performed += MenuSceneBackButton;
             PlayerInputAsset.Player.PlayScene.performed += PlaySceneBackButton;
             PlayerInputAsset.Player.ShopScene.performed += ShopSceneBackButton;
             PlayerInputAsset.Player.SettingsScene.performed += SettingsSceneBackButton;
@@ -53,11 +52,7 @@ namespace Input
         {
             PlayScenePauseWindow.Instance.ChangeWindowState();
         }
-
-        private void MenuSceneBackButton(InputAction.CallbackContext context)
-        {
-            MenuSceneExitWindow.Instance.ChangeWindowState();
-        }
+        
 
         private void ShopSceneBackButton(InputAction.CallbackContext context)
         {

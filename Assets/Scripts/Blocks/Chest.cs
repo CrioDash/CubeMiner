@@ -14,6 +14,7 @@ namespace Fruit
         [SerializeField] private Transform powerSpawnPos;
         [SerializeField] private AnimationCurve animationCurve;
 
+        private AudioSource _audioSource;
         private SpriteRenderer _sprite;
         private ParticleSystem _system;
         private Rigidbody2D _body;
@@ -25,6 +26,7 @@ namespace Fruit
             _sprite = GetComponent<SpriteRenderer>();
             _body = GetComponent<Rigidbody2D>();
             _system = GetComponentInChildren<ParticleSystem>();
+            _audioSource = GetComponent<AudioSource>();
         }
 
         private void OnMouseUpAsButton()
@@ -43,6 +45,7 @@ namespace Fruit
                 return;
 
             isOpened = true;
+            _audioSource.Play();
             
             _sprite.sprite = spriteChestOpened;
             _system.Play();

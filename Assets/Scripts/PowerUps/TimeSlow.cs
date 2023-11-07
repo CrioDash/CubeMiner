@@ -14,7 +14,7 @@ namespace PowerUps
         
         private void Awake()
         {
-            Duration += PlayerSave.Instance.powerupLevels[Type] * 1;
+            Duration += PlayerSave.Instance.powerupLevels[Type] * 0.5f;
         }
         
         public override void UsePowerUp()

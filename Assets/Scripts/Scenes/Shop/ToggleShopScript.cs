@@ -7,7 +7,7 @@ namespace Scenes.Shop
     public class ToggleShopScript:MonoBehaviour
     {
 
-        [SerializeField] private CanvasGroup _group;
+        [SerializeField] private ShopPageScript _pageScript;
 
         private Toggle _toggle;
 
@@ -20,9 +20,8 @@ namespace Scenes.Shop
         {
             _toggle.onValueChanged.AddListener(delegate
             {
-                _group.alpha = _toggle.isOn ? 1 : 0;
-                _group.blocksRaycasts = _toggle.isOn;
-                _group.gameObject.SetActive(_toggle.isOn);
+               _pageScript.ShowPage(_toggle.isOn);
+               _toggle.interactable = !_toggle.isOn;
             });
         }
     }

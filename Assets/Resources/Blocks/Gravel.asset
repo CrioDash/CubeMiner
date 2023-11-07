@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d940a90d5bc45f39e44e06e658b8386, type: 3}
   m_Name: Gravel
   m_EditorClassIdentifier: 
-  _rewardScore: 200
-  _rewardMoney: 2
-  _health: 2
+  _rewardScore: 300
+  _rewardMoney: 3
+  _health: 3
   _sprite: {fileID: 21300000, guid: a2c931b5c23c9884598f4af3461f6629, type: 3}
-  _clip: {fileID: 8300000, guid: 5c4e13e54e015fc42b1a59ef56e69acb, type: 3}
+  _clip: {fileID: 8300000, guid: 1a3e45e0012e64c43a784a845381c4dc, type: 3}

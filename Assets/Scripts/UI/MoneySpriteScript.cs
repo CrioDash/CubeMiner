@@ -13,11 +13,13 @@ namespace UI
         public static MoneySpriteScript Instance;
 
         private ParticleSystem _system;
+        private AudioSource _audioSource;
         
         private void Awake()
         {
             Instance = this;
             _system = GetComponentInChildren<ParticleSystem>();
+            _audioSource = GetComponent<AudioSource>();
         }
 
         public void CreateMoney(int reward, Vector3 pos)
@@ -43,7 +45,8 @@ namespace UI
             }
 
             Destroy(gm);
-            
+
+            _audioSource.Play();
             _system.Play();
 
             Variables.Money += reward;
