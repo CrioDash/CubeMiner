@@ -40,6 +40,8 @@ namespace Data
 
         public bool SoundON { set; get; }
         public bool MusicON { set; get; }
+        
+        public bool NoAds { set; get; }
 
         public PlayerSave()
         {
@@ -49,8 +51,9 @@ namespace Data
             TutorialCompleted = false;
             SoundON = true;
             MusicON = true;
+            NoAds = false;
             RecordScore = 0;
-            Money = 0;
+            Money = 30000;
             CurrentTool = ToolType.Shovel;
             ToolLevel.Add(CurrentTool, 0);
         }

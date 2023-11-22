@@ -135,7 +135,7 @@ namespace UI
                 mesh.vertices = vertices;
                 mesh.colors = colors;
                 txt.canvasRenderer.SetMesh(mesh);
-                yield return null;
+                yield return new WaitForSeconds(Time.deltaTime);
             }
         }
 
@@ -186,7 +186,7 @@ namespace UI
                  mesh.vertices = vertices;
                  mesh.colors = colors;
                  txt.canvasRenderer.SetMesh(mesh);
-                 yield return null;
+                 yield return new WaitForSeconds(Time.deltaTime);
              }
           
         }

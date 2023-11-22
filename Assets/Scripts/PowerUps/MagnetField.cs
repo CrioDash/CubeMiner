@@ -40,6 +40,7 @@ namespace PowerUps
                     if(body == null || body.GetComponent<BoxCollider2D>() == null || !body.GetComponent<BoxCollider2D>().enabled )
                         yield break;
                     transform.position = Vector3.zero;
+                    body.velocity = Vector3.zero;
                     body.MovePosition(Vector3.Lerp(startPos, this.transform.position, _curve.Evaluate(t)));
                     yield return null;
                     t += Time.deltaTime;
@@ -66,7 +67,7 @@ namespace PowerUps
                 t = 0;
                 while (t < 1)
                 {
-                    
+                    transform.position = Vector3.zero;
                     transform.eulerAngles = Vector3.Lerp(startVec, endVec, t);
                     t += Time.deltaTime * 4;
                     yield return null;
@@ -75,6 +76,7 @@ namespace PowerUps
                 t = 0;
                 while (t <1)
                 {
+                    transform.position = Vector3.zero;
                     transform.eulerAngles = Vector3.Lerp(endVec, startVec, t);
                     t += Time.deltaTime * 4;
                     yield return null;

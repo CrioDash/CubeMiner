@@ -16,6 +16,7 @@ namespace Utilities
             IsPaused = !IsPaused;
             Time.timeScale = IsPaused ? 0 : 1;
             EventBus.Publish(EventBus.EventType.GAME_PAUSE);
+            Debug.Log(IsPaused);
         }
     }
 }

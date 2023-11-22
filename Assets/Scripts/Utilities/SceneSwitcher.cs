@@ -36,6 +36,12 @@ public class SceneSwitcher : MonoBehaviour
        
     }
 
+    private void Update()
+    {
+        if (PauseScript.IsPaused && Time.timeScale != 0)
+            Time.timeScale = 0;
+    }
+
     public void LoadScene(string name)
     {
         EventBus.Publish(EventBus.EventType.GAME_SAVE);

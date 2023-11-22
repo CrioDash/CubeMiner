@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Data;
+using Scenes.Menu;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -64,14 +65,26 @@ namespace UI
             if(Coroutine == null)
                 Coroutine = StartCoroutine(ShowEndGameRoutine());
         }
+
+        private IEnumerator WaitForPause()
+        {
+            yield return new WaitUntil(() => !PauseScript.IsPaused);
+            PauseScript.SetPause();
+        }
         
         private IEnumerator ShowEndGameRoutine()
         {
             if(!PauseScript.IsPaused)
                 PauseScript.SetPause();
-            
-            
 
+            yield return new WaitForSecondsRealtime(0.25f);
+            while (InterstitialAdTest.IsOpened)
+            {
+                yield return null;
+            }
+            yield return null;
+            
+            
             #region Variables
 
             float t = 0;
@@ -121,7 +134,8 @@ namespace UI
             
             #region MovePanel
 
-            
+            if(!PauseScript.IsPaused)
+                PauseScript.SetPause();
             
             while (t<1)
             {

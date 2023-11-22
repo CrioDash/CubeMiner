@@ -47,12 +47,16 @@ namespace Fruit
 
         private void OnMouseUpAsButton()
         {
+            if(_isSliced)
+                return;
             _isSliced = true;
             Explode();
         }
 
         private void OnMouseDown()
         {
+            if(_isSliced)
+                return;
             _isSliced = true;
             Explode();
         }
@@ -115,14 +119,14 @@ namespace Fruit
             source.clip = parentSource.clip;
             source.volume = 1f;
 
-            foreach (GameObject obj in objects)
+            for (int i = 0 ; i< objects.Length; i++)
             {
 
-                obj.GetComponent<MeshRenderer>().enabled = false;
+                objects[i].GetComponent<MeshRenderer>().enabled = false;
                 
                 
                 source.Play();
-
+                
                 EventBus.Publish(EventBus.EventType.TAKE_DAMAGE);
 
                 yield return wait;

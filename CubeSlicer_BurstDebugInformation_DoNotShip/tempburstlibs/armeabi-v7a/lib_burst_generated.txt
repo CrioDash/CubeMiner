@@ -36,6 +36,7 @@ Library: D:\UnityProjects\PixelNinja\Temp\BurstOutput\tempburstlibs\armeabi-v7a\
 --assembly-defines=Unity.VisualScripting.Core;
 --assembly-defines=Unity.2D.Animation.Runtime;
 --assembly-defines=Unity.2D.Tilemap.Extras;
+--assembly-defines=Purchasing.Common;
 --assembly-defines=Unity.Services.Core.Telemetry;
 --assembly-defines=Unity.InternalAPIEngineBridge.001;
 --assembly-defines=Unity.2D.Common.Runtime;
@@ -119,6 +120,7 @@ Library: D:\UnityProjects\PixelNinja\Temp\BurstOutput\tempburstlibs\armeabi-v7a\
 --assembly-defines=Unity.VisualScripting.Core;
 --assembly-defines=Unity.2D.Animation.Runtime;
 --assembly-defines=Unity.2D.Tilemap.Extras;
+--assembly-defines=Purchasing.Common;
 --assembly-defines=Unity.Services.Core.Telemetry;
 --assembly-defines=Unity.InternalAPIEngineBridge.001;
 --assembly-defines=Unity.2D.Common.Runtime;

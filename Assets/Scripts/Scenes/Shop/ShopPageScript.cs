@@ -47,6 +47,8 @@ namespace Scenes.Shop
                 yield return null;
             }
 
+            _group.alpha = 1;
+
             _group.blocksRaycasts = true;
             
         }

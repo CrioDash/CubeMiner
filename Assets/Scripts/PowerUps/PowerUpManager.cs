@@ -32,7 +32,7 @@ namespace PowerUps
         {
             StartCoroutine(PowerUpRoutine(chestPos, startPos));
         }
-        
+
         private IEnumerator PowerUpRoutine(Vector3 chestPos, Vector3 startPos)
         {
             Variables.PowerType type = (Variables.PowerType) Random.Range(0, powerUpPrefab.Length);
@@ -41,9 +41,7 @@ namespace PowerUps
 
             CanvasGroup group = new CanvasGroup();
             Vector3 endPos = Vector3.zero;
-
-           
-
+            
             if (activePowerUps.ContainsKey(type))
             {
                 group = powerUps[type];
@@ -54,11 +52,13 @@ namespace PowerUps
                     .GetComponent<CanvasGroup>();
                 group.alpha = 0;
             }
-            
+
+            yield return null;
+
             GameObject movingIcon = Instantiate(group.transform.GetChild(0).gameObject, startPos, Quaternion.identity);
             movingIcon.transform.SetParent(group.transform.parent);
             
-
+            
             while (t <= 1)
             {
                 while (PauseScript.IsPaused)
@@ -69,7 +69,17 @@ namespace PowerUps
                 yield return null;
             }
             
+            
+            yield return null;
+            
             t = 0;
+            
+            if (group == null)
+            {
+                group = Instantiate(powerUpPrefab[(int)type], powerUpContainer.transform)
+                    .GetComponent<CanvasGroup>();
+                group.alpha = 0;
+            }
             
             endPos = group.transform.position;
 
@@ -81,10 +91,10 @@ namespace PowerUps
                 t += Time.deltaTime * 4;
                 yield return null;
             }
-
+            
             if (group == null)
             {
-                group = Instantiate(powerUpPrefab[(int) type], powerUpContainer.transform)
+                group = Instantiate(powerUpPrefab[(int)type], powerUpContainer.transform)
                     .GetComponent<CanvasGroup>();
                 group.alpha = 0;
             }
@@ -126,15 +136,12 @@ namespace PowerUps
                 t += Time.deltaTime;
                 yield return null;
             }
-
-            group.alpha = 0;
-            
-            group.GetComponent<PowerUp>().RemovePowerUp();
-
-            yield return new WaitForSeconds(1f);
             Destroy(group.gameObject);
             powerUps.Remove(type);
             activePowerUps.Remove(type);
+            group.GetComponent<PowerUp>().RemovePowerUp();
+            
+            
             
 
         }
