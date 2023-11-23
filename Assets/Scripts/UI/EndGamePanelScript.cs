@@ -78,13 +78,11 @@ namespace UI
                 PauseScript.SetPause();
 
             yield return new WaitForSecondsRealtime(0.25f);
-            while (InterstitialAdTest.IsOpened)
+            while (AdsInitializer.IsOpened)
             {
                 yield return null;
             }
-            yield return null;
-            
-            
+
             #region Variables
 
             float t = 0;

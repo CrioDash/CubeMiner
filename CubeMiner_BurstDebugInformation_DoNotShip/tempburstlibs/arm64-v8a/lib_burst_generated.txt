@@ -10,12 +10,6 @@ Library: D:\UnityProjects\PixelNinja\Temp\BurstOutput\tempburstlibs\arm64-v8a\li
 --target-framework=NetFramework
 --float-mode=Fast
 --assembly-defines=Assembly-CSharp;
---assembly-defines=GoogleMobileAds.Android;
---assembly-defines=GoogleMobileAds.Common;
---assembly-defines=GoogleMobileAds.Core;
---assembly-defines=GoogleMobileAds;
---assembly-defines=GoogleMobileAds.Ump.Android;
---assembly-defines=GoogleMobileAds.Ump;
 --assembly-defines=Mono.Security;
 --assembly-defines=mscorlib;
 --assembly-defines=Newtonsoft.Json;
@@ -56,7 +50,7 @@ Library: D:\UnityProjects\PixelNinja\Temp\BurstOutput\tempburstlibs\arm64-v8a\li
 --assembly-defines=UnityEngine;
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\UnityProjects\PixelNinja\Temp\Burst
---key-folder=D:/Programs/Unity/2022.3.12f1/Editor/Data/PlaybackEngines/AndroidPlayer
+--key-folder=D:/Programs/Unity/2022.3.14f1/Editor/Data/PlaybackEngines/AndroidPlayer
 --decode-folder=D:\UnityProjects\PixelNinja\Library\Burst
 --output=D:\UnityProjects\PixelNinja\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
@@ -73,12 +67,6 @@ Library: D:\UnityProjects\PixelNinja\Temp\BurstOutput\tempburstlibs\arm64-v8a\li
 --float-precision=Standard
 --target-framework=NetFramework
 --assembly-defines=Assembly-CSharp;
---assembly-defines=GoogleMobileAds.Android;
---assembly-defines=GoogleMobileAds.Common;
---assembly-defines=GoogleMobileAds.Core;
---assembly-defines=GoogleMobileAds;
---assembly-defines=GoogleMobileAds.Ump.Android;
---assembly-defines=GoogleMobileAds.Ump;
 --assembly-defines=Mono.Security;
 --assembly-defines=mscorlib;
 --assembly-defines=Newtonsoft.Json;
@@ -119,7 +107,7 @@ Library: D:\UnityProjects\PixelNinja\Temp\BurstOutput\tempburstlibs\arm64-v8a\li
 --assembly-defines=UnityEngine;
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\UnityProjects\PixelNinja\Temp\Burst
---key-folder=D:/Programs/Unity/2022.3.12f1/Editor/Data/PlaybackEngines/AndroidPlayer
+--key-folder=D:/Programs/Unity/2022.3.14f1/Editor/Data/PlaybackEngines/AndroidPlayer
 --decode-folder=D:\UnityProjects\PixelNinja\Library\Burst
 --output=D:\UnityProjects\PixelNinja\Temp\BurstOutput\tempburstlibs\arm64-v8a\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
