@@ -16,6 +16,8 @@ namespace Game
         [SerializeField] private Image _cursorImage;
         
         private CanvasGroup _group;
+
+        public static bool isShown = false;
         
         private void OnEnable()
         {
@@ -44,11 +46,13 @@ namespace Game
 
         private IEnumerator ShowTutorialRoutine()
         {
+            yield return new WaitForSeconds(1.75f);
             if(PlayerSave.Instance.TutorialCompleted)
                 yield break;
-            yield return new WaitForSeconds(1.75f);
-            
             PauseScript.SetPause();
+
+            isShown = true;
+            
             transform.position = FindObjectOfType<Dynamite>().transform.position;
             _group.alpha = 1;
 

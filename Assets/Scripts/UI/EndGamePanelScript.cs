@@ -66,6 +66,11 @@ namespace UI
                 Coroutine = StartCoroutine(ShowEndGameRoutine());
         }
 
+        void LeaderBoardUpdate(bool success)
+        {
+            if(success) Debug.Log("Updated Leaderboard");
+        }
+
         private IEnumerator WaitForPause()
         {
             yield return new WaitUntil(() => !PauseScript.IsPaused);
@@ -182,6 +187,8 @@ namespace UI
             if (Variables.Score > PlayerSave.Instance.RecordScore)
             {
                 PlayerSave.Instance.RecordScore = Variables.Score;
+                
+                Social.ReportScore(PlayerSave.Instance.RecordScore, GPGSIds.leaderboard_cube_miner_ranks, LeaderBoardUpdate);
                 
                 startClr = textRecord.color;
                 endClr = startClr;

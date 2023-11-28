@@ -9,9 +9,10 @@ namespace Scenes.Menu
 {
     public class InterstitialAdTest : MonoBehaviour
     {
-        private void Start()
+        private void Awake()
         {
-            IronSource.Agent.loadInterstitial();
+            if(!PlayerSave.Instance.NoAds) 
+                IronSource.Agent.loadInterstitial();
         }
 
         private void OnEnable()
@@ -26,7 +27,8 @@ namespace Scenes.Menu
 
         public void CallAd()
         {
-            IronSource.Agent.showInterstitial();
+            if(!PlayerSave.Instance.NoAds)
+                IronSource.Agent.showInterstitial();
         }
     }
 }

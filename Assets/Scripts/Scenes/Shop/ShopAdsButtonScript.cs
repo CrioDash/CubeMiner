@@ -1,6 +1,8 @@
 ﻿using System;
 using Data;
+using Unity.Services.Core;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Purchasing;
 using UnityEngine.UI;
 
@@ -8,8 +10,9 @@ namespace Scenes.Shop
 {
     public class ShopAdsButtonScript:MonoBehaviour
     {
-        
+
         private Button _button;
+        private CodelessIAPButton _iapButton;
 
         private void Awake()
         {

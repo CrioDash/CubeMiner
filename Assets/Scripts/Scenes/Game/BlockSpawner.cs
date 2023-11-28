@@ -71,7 +71,7 @@ public class BlockSpawner : MonoBehaviour
         currentSpawnTime -= 0.05f;
         currentSpawnTime = Mathf.Clamp(currentSpawnTime, MinSpawnTime, float.MaxValue);
 
-        currentFallSpeed += 10f;
+        currentFallSpeed += 5f;
         currentFallSpeed = Mathf.Clamp(currentFallSpeed, baseFallSpeed, MaxFallSpeed);
 
         currentType = _types[Random.Range(0, _types.Count)];

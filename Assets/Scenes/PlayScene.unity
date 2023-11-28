@@ -7219,8 +7219,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.05334997, y: -0.08074999, z: 0}
-    m_Extent: {x: 3.32315, y: 5.58755, z: 0}
+    m_Center: {x: -0.05065, y: -0.0783, z: 0}
+    m_Extent: {x: 3.3369498, y: 5.5902, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -14400,8 +14400,8 @@ MonoBehaviour:
   dynamitePrefab: {fileID: 8720240083090408559, guid: 93b9de7284c64d24f8c32416401bf84a, type: 3}
   chestPrefab: {fileID: 5426441551972481544, guid: 478f300b629946f449770bd8f5f16b41, type: 3}
   chestSpawnChance: 2
-  baseSpawnTime: 0.5
-  baseFallSpeed: 20
+  baseSpawnTime: 0.75
+  baseFallSpeed: 10
   baseBlockGoal: 10
 --- !u!1 &1657488535
 GameObject:

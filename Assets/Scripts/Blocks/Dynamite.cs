@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Security.Cryptography;
 using Data;
+using Game;
 using Unity.VisualScripting;
 using UnityEngine;
 using Utilities;
@@ -45,34 +46,32 @@ namespace Fruit
             StartCoroutine(ExplodeRoutine(SpriteCutter.Instance.CutTnt(gameObject)));
         }
 
-        private void OnMouseUpAsButton()
-        {
-            if(_isSliced)
-                return;
-            _isSliced = true;
-            Explode();
-        }
-
         private void OnMouseDown()
         {
             if(_isSliced)
                 return;
-            _isSliced = true;
+            
+            if (!PlayerSave.Instance.TutorialCompleted)
+                PlayerSave.Instance.TutorialCompleted = true;
+            
+            switch (ClickTutorialScript.isShown)
+            {
+                case true:
+                    ClickTutorialScript.isShown = false;
+                    PlayerSave.Instance.TutorialCompleted = true;
+                    PauseScript.SetPause();
+                    break;
+                case false when PauseScript.IsPaused:
+                    return;
+            }
+
             Explode();
         }
 
         private void Explode()
         {
 
-            if (PauseScript.IsPaused)
-            {
-                PlayerSave.Instance.TutorialCompleted = true;
-                PauseScript.SetPause();
-            }
-
-            if(!PlayerSave.Instance.TutorialCompleted)
-                    return;
-            
+            _isSliced = true;
 
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
             

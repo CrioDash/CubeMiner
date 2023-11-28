@@ -29,6 +29,11 @@ namespace Data
             }
         }
 
+        public void CopySave()
+        {
+            
+        }
+
         public void DeleteSave()
         {
             File.Delete(_filepath);

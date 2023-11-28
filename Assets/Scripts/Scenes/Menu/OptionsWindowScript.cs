@@ -82,7 +82,7 @@ namespace Scenes.Menu
             _img.material.SetFloat("_Dissolve", -0.1f);
             foreach (Image img in _images)
             {
-                img.material.SetFloat("_Dissolve", 0f);
+                img.material.SetFloat("_Dissolve", -0.1f);
             }
 
             _group.interactable = true;

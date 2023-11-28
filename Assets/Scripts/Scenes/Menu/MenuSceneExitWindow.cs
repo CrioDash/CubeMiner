@@ -61,6 +61,10 @@ namespace UI
                 yield return null;
             }
 
+            for (int i = 0; i < _images.Length; i++)
+            {
+                _images[i].material.SetFloat("_Dissolve", -0.1f);
+            }
             _group.blocksRaycasts = true;
             
         }

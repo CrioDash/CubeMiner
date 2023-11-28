@@ -10,6 +10,7 @@ Library: D:\UnityProjects\PixelNinja\Temp\BurstOutput\tempburstlibs\arm64-v8a\li
 --target-framework=NetFramework
 --float-mode=Fast
 --assembly-defines=Assembly-CSharp;
+--assembly-defines=Google.Play.Games;
 --assembly-defines=Mono.Security;
 --assembly-defines=mscorlib;
 --assembly-defines=Newtonsoft.Json;
@@ -67,6 +68,7 @@ Library: D:\UnityProjects\PixelNinja\Temp\BurstOutput\tempburstlibs\arm64-v8a\li
 --float-precision=Standard
 --target-framework=NetFramework
 --assembly-defines=Assembly-CSharp;
+--assembly-defines=Google.Play.Games;
 --assembly-defines=Mono.Security;
 --assembly-defines=mscorlib;
 --assembly-defines=Newtonsoft.Json;

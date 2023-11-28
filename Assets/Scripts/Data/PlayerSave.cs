@@ -53,7 +53,7 @@ namespace Data
             MusicON = true;
             NoAds = false;
             RecordScore = 0;
-            Money = 30000;
+            Money = 0;
             CurrentTool = ToolType.Shovel;
             ToolLevel.Add(CurrentTool, 0);
         }
