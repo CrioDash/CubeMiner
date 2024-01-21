@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Data;
+using Game;
 using Scenes.Menu;
 using TMPro;
 using Unity.VisualScripting;
@@ -83,7 +84,7 @@ namespace UI
                 PauseScript.SetPause();
 
             yield return new WaitForSecondsRealtime(0.25f);
-            while (AdsInitializer.IsOpened)
+            while (AdManager.isShowing)
             {
                 yield return null;
             }

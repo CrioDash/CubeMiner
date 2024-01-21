@@ -10,9 +10,7 @@ namespace Scenes.Shop
 {
     public class ShopAdsButtonScript:MonoBehaviour
     {
-
-        private Button _button;
-        private CodelessIAPButton _iapButton;
+        private static Button _button;
 
         private void Awake()
         {
@@ -23,11 +21,12 @@ namespace Scenes.Shop
         {
             _button.interactable = !PlayerSave.Instance.NoAds;
         }
-
-        public void RemoveAds()
+        
+        public static void RemoveAds()
         {
             PlayerSave.Instance.NoAds = true;
             _button.interactable = !PlayerSave.Instance.NoAds;
         }
+        
     }
 }

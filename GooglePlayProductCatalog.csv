@@ -1,2 +1,2 @@
 Product ID,Published State,Purchase Type,Auto Translate,Locale; Title; Description,Auto Fill Prices,Price,Pricing Template ID
-remove_ads,published,managed_by_android,false,en_US;Remove Ads;Removes ads from game completely,true,90000000,
+com.cubeminer.removeads,published,managed_by_android,false,en_US;Remove Ads;Removes ads from game completely,true,90000000,

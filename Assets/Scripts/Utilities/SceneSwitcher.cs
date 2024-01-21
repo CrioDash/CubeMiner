@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Data;
+using GoogleMobileAds.Api;
 using Input;
 using UnityEngine;
 using UnityEngine.Events;
@@ -33,7 +34,7 @@ public class SceneSwitcher : MonoBehaviour
     {
         DontDestroyOnLoad(this);
         Application.targetFrameRate = 60;
-       
+        
     }
 
     private void Update()
