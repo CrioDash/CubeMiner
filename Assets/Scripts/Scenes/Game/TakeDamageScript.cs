@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using Unity.VisualScripting;
+﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using Utilities;
 using EventBus = Utilities.EventBus;
@@ -38,7 +34,6 @@ namespace Game
 
         private void TakeDamage()
         {
-            Debug.Log("Damage");
             _source.Play();
 
             if (Variables.CurrentHealth >= Variables.MaxHealth)

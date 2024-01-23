@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Fruit;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using EventBus = Utilities.EventBus;
 using Random = UnityEngine.Random;
@@ -71,7 +69,7 @@ public class BlockSpawner : MonoBehaviour
         currentSpawnTime -= 0.05f;
         currentSpawnTime = Mathf.Clamp(currentSpawnTime, MinSpawnTime, float.MaxValue);
 
-        currentFallSpeed += 5f;
+        currentFallSpeed += 10f;
         currentFallSpeed = Mathf.Clamp(currentFallSpeed, baseFallSpeed, MaxFallSpeed);
 
         currentType = _types[Random.Range(0, _types.Count)];
@@ -91,7 +89,7 @@ public class BlockSpawner : MonoBehaviour
 
     private IEnumerator SpawnFruitsRoutine()
     {
-        WaitForSeconds wait = new WaitForSeconds(baseSpawnTime);
+        WaitForSeconds wait = new WaitForSeconds(currentSpawnTime);
         while (true)
         {
             int mult = Random.Range(0, 2) == 0 ? -1 : 1;
@@ -128,6 +126,18 @@ public class BlockSpawner : MonoBehaviour
             
             block.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(35, 70)*mult*-1, -currentFallSpeed));
             block.GetComponent<Rigidbody2D>().AddTorque(0.5f, ForceMode2D.Impulse);
+
+            if (Variables.Score > 50000 && Random.Range(0,10) < 4)
+            {
+                spawnPos.x *= -1;
+                Variables.BlocksFall++;
+            
+                block = Instantiate(cubePrefab, spawnPos, Quaternion.identity).GetComponent<Block>();
+                block.SetStats(currentType);
+            
+                block.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(35, 70)*mult*-1, -currentFallSpeed));
+                block.GetComponent<Rigidbody2D>().AddTorque(0.5f, ForceMode2D.Impulse);
+            }
             
             yield return wait;
         }

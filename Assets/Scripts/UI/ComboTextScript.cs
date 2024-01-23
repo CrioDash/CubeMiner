@@ -129,7 +129,6 @@ namespace UI
                     vertices[index + 1] += offset;
                     vertices[index + 2] += offset;
                     vertices[index + 3] += offset;
-                    
                 }
 
                 mesh.vertices = vertices;
@@ -196,8 +195,6 @@ namespace UI
              return sin ? new Vector2(Mathf.Sin(time*Random.Range(first,last)), Mathf.Cos(time*Random.Range(first,last))) : new Vector2(0, Mathf.Cos(time*Random.Range(first,last)));
          }
          
-        
-
 
         private IEnumerator TextGrowRoutine(Transform obj)
         {
@@ -251,8 +248,6 @@ namespace UI
 
         private IEnumerator TextFadeRoutine(TMP_Text txt)
         {
-            
-            
             float t = 0;
             CanvasGroup group = txt.GetComponent<CanvasGroup>();
             while (t<1)

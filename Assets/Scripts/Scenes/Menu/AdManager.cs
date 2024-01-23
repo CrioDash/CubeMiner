@@ -3,13 +3,15 @@ using System.Collections;
 using Data;
 using GoogleMobileAds.Api;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using Utilities;
 
 namespace Scenes.Menu
 {
     public class AdManager:MonoBehaviour
     {
-
+        
         public static AdManager Instance;
         
         private InterstitialAd _interstitialAd;
@@ -33,6 +35,7 @@ namespace Scenes.Menu
             {
                 LoadInterstitialAd();
             });
+            
         }
 
         private void OnEnable()
@@ -68,26 +71,17 @@ namespace Scenes.Menu
                 _interstitialAd.Destroy();
                 _interstitialAd = null;
             }
-
-            Debug.Log("Loading the interstitial ad.");
-
-            // create our request used to load the ad.
+            
             var adRequest = new AdRequest();
-
-            // send the request to load the ad.
+            
             InterstitialAd.Load(_adUnitId, adRequest,
                 (InterstitialAd ad, LoadAdError error) =>
                 {
-                    // if error is not null, the load request failed.
                     if (error != null || ad == null)
                     {
-                        Debug.LogError("interstitial ad failed to load an ad " +
-                                       "with error : " + error);
                         return;
                     }
-
-                    Debug.Log("Interstitial ad loaded with response : "
-                              + ad.GetResponseInfo());
+                    
 
                     _interstitialAd = ad;
                     _interstitialAd.OnAdFullScreenContentClosed += () => isShowing = false;

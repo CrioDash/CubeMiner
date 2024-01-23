@@ -1,9 +1,7 @@
-﻿using System;
+﻿
 using System.Collections;
-using System.Security.Cryptography;
 using Data;
 using Game;
-using Unity.VisualScripting;
 using UnityEngine;
 using Utilities;
 using EventBus = Utilities.EventBus;
@@ -113,7 +111,7 @@ namespace Fruit
             ParticleSystem system = Instantiate(parentSystem.gameObject, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
             system.transform.localScale /= 3;
             system.Play();
-            AudioSource source = system.AddComponent<AudioSource>();
+            AudioSource source = system.gameObject.AddComponent<AudioSource>();
 
             source.clip = parentSource.clip;
             source.volume = 1f;

@@ -8,6 +8,8 @@ namespace Menu
     public class LightFadeScript:MonoBehaviour
     {
 
+        
+        
         private Light2D _light;
 
         private void Awake()

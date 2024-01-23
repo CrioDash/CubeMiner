@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections;
 using Data;
-using Game;
 using Scenes.Menu;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;

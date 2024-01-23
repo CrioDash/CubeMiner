@@ -2,12 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Fruit;
-using Unity.Properties;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using Variables = Data.Variables;
 
 public class SpriteCutter : MonoBehaviour
 {

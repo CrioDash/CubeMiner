@@ -1,10 +1,7 @@
-﻿using System;
+﻿
 using System.Collections;
 using PowerUps;
-using Unity.VisualScripting;
 using UnityEngine;
-using Random = UnityEngine.Random;
-using Variables = Data.Variables;
 
 namespace Fruit
 {
